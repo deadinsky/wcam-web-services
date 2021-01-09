@@ -1,4 +1,4 @@
-package com.thomasdedinsky.fydp.fydpweb;
+package com.thomasdedinsky.fydp.fydpweb.models;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,7 +8,7 @@ import java.sql.Date;
 public class User {
     @Id
     @Column(name="ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="FIRST_NAME")
     private String firstName;

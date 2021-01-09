@@ -1,4 +1,4 @@
-package com.thomasdedinsky.fydp.fydpweb;
+package com.thomasdedinsky.fydp.fydpweb.models;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Wristband {
     @Id
     @Column(name="ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="USER_ID")
     private int userId;

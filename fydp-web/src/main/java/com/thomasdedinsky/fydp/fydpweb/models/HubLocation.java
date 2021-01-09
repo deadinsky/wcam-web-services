@@ -1,17 +1,17 @@
-package com.thomasdedinsky.fydp.fydpweb;
+package com.thomasdedinsky.fydp.fydpweb.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="WRISTBAND_LOCATIONS")
-public class WristbandLocation {
+@Table(name="HUB_LOCATIONS")
+public class HubLocation {
     @Id
     @Column(name="ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="WRISTBAND_ID")
-    private int wristbandId;
+    @Column(name="HUB_ID")
+    private int hubId;
     @Column(name="LOCATION_X")
     private double locationX;
     @Column(name="LOCATION_Y")
@@ -21,14 +21,14 @@ public class WristbandLocation {
     @Column(name="TIME_STAMP")
     private Timestamp timeStamp;
 
-    public WristbandLocation() {
+    public HubLocation() {
         super();
     }
 
-    public WristbandLocation(int id, int wristbandId, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
+    public HubLocation(int id, int hubId, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
         super();
         this.id = id;
-        this.wristbandId = wristbandId;
+        this.hubId = hubId;
         this.locationX = locationX;
         this.locationY = locationY;
         this.locationZ = locationZ;
@@ -43,12 +43,12 @@ public class WristbandLocation {
         this.id = id;
     }
 
-    public int getWristbandId() {
-        return wristbandId;
+    public int getHubId() {
+        return hubId;
     }
 
-    public void setWristbandId(int wristbandId) {
-        this.wristbandId = wristbandId;
+    public void setHubId(int hubId) {
+        this.hubId = hubId;
     }
 
     public double getLocationX() {

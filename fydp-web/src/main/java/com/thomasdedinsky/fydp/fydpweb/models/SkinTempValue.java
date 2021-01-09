@@ -1,14 +1,14 @@
-package com.thomasdedinsky.fydp.fydpweb;
+package com.thomasdedinsky.fydp.fydpweb.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="OXYGEN_VALUES")
-public class OxygenValue {
+@Table(name="SKIN_TEMP_VALUES")
+public class SkinTempValue {
     @Id
     @Column(name="ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="WRISTBAND_ID")
     private int wristbandId;
@@ -17,11 +17,11 @@ public class OxygenValue {
     @Column(name="VALUE")
     private double value;
 
-    public OxygenValue() {
+    public SkinTempValue() {
         super();
     }
 
-    public OxygenValue(int id, int wristbandId, Timestamp timeStamp, double value) {
+    public SkinTempValue(int id, int wristbandId, Timestamp timeStamp, double value) {
         super();
         this.id = id;
         this.wristbandId = wristbandId;

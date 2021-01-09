@@ -1,4 +1,4 @@
-package com.thomasdedinsky.fydp.fydpweb;
+package com.thomasdedinsky.fydp.fydpweb.models;
 
 import javax.persistence.*;
 
@@ -7,6 +7,6 @@ import javax.persistence.*;
 public class Hub {
     @Id
     @Column(name="ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 }

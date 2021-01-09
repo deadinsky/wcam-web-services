@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wristbands</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+        </tr>
+        <tr th:each="wristband:${wristbands}">
+            <td th:text="${wristband.id}">id</td>
+            <td th:text="${wristband.userId}">userId</td>
+        </tr>
+    </table>
+</body>
+</html>
