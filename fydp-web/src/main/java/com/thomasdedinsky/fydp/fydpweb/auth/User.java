@@ -22,12 +22,21 @@ public class User {
     private String email;
     @Column(name="PASSWORD")
     private String password;
+    @Column(name="IS_LOCKED")
+    private boolean isLocked;
+    @Column(name="IS_ENABLED")
+    private boolean isEnabled;
+    @Column(name="IS_MANAGER")
+    private boolean isManager;
+    @Column(name="IS_ADMIN")
+    private boolean isAdmin;
 
     public User() {
         super();
     }
 
-    public User(int id, String firstName, String lastName, Date birthDate, String notes, String email, String password) {
+    public User(int id, String firstName, String lastName, Date birthDate, String notes, String email, String password,
+                boolean isLocked, boolean isEnabled, boolean isManager, boolean isAdmin) {
         super();
         this.id = id;
         this.firstName = firstName;
@@ -36,6 +45,10 @@ public class User {
         this.notes = notes;
         this.email = email;
         this.password = password;
+        this.isLocked = isLocked;
+        this.isEnabled = isEnabled;
+        this.isManager = isManager;
+        this.isAdmin = isAdmin;
     }
 
     public int getId() {
@@ -92,5 +105,37 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    public void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public boolean isManager() {
+        return isManager;
+    }
+
+    public void setManager(boolean manager) {
+        isManager = manager;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
