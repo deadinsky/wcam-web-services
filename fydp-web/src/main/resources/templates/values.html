@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Values</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Wristband ID</th>
+        <th>Timestamp</th>
+        <th>Value</th>
+    </tr>
+    <tr th:each="value:${values}">
+        <td th:text="${value.id}">id</td>
+        <td th:text="${value.wristbandId}">wristbandId</td>
+        <td th:text="${value.timeStamp}">timeStamp</td>
+        <td th:text="${value.value}">value</td>
+    </tr>
+</table>
+</body>
+</html>
