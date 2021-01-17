@@ -28,11 +28,11 @@ public class ValueController {
     public String getValues(Model model, @RequestParam(name = "type") String type,
                             @RequestParam(name = "pageSize") int pageSize,
                             @RequestParam(name = "pageNum") int pageNum,
-                            @RequestParam(name = "wristbandId", required = false) Integer wristbandId) {
-        if ((pageSize < 1 || pageSize >= PAGE_SIZE_LIMIT) || pageNum < 0 || (wristbandId != null && wristbandId < 0)) {
+                            @RequestParam(name = "wristband", required = false) Wristband wristband) {
+        if ((pageSize < 1 || pageSize >= PAGE_SIZE_LIMIT) || pageNum < 0 || (wristband != null && wristband.getId() < 0)) {
             return "values";
         }
-        if (wristbandId == null) {
+        if (wristband == null) {
             switch (type) {
                 case "ecg":
                     model.addAttribute("values", valueService.getAllECGValues(PageRequest.of(pageNum, pageSize)));
@@ -53,16 +53,16 @@ public class ValueController {
         }
         switch (type) {
             case "ecg":
-                model.addAttribute("values", valueService.getECGValuesByWristbandId(wristbandId, PageRequest.of(pageNum, pageSize)));
+                model.addAttribute("values", valueService.getECGValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             case "heartrate":
-                model.addAttribute("values", valueService.getHeartRateValuesByWristbandId(wristbandId, PageRequest.of(pageNum, pageSize)));
+                model.addAttribute("values", valueService.getHeartRateValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             case "oxygen":
-                model.addAttribute("values", valueService.getOxygenValuesByWristbandId(wristbandId, PageRequest.of(pageNum, pageSize)));
+                model.addAttribute("values", valueService.getOxygenValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             case "skintemp":
-                model.addAttribute("values", valueService.getSkinTempValuesByWristbandId(wristbandId, PageRequest.of(pageNum, pageSize)));
+                model.addAttribute("values", valueService.getSkinTempValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             default:
                 break;

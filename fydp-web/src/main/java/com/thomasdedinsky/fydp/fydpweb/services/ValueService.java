@@ -1,10 +1,7 @@
 package com.thomasdedinsky.fydp.fydpweb.services;
 
 import com.thomasdedinsky.fydp.fydpweb.data.*;
-import com.thomasdedinsky.fydp.fydpweb.models.ECGValue;
-import com.thomasdedinsky.fydp.fydpweb.models.HeartRateValue;
-import com.thomasdedinsky.fydp.fydpweb.models.OxygenValue;
-import com.thomasdedinsky.fydp.fydpweb.models.SkinTempValue;
+import com.thomasdedinsky.fydp.fydpweb.models.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,11 +30,11 @@ public class ValueService {
     public Page<ECGValue> getAllECGValues(Pageable pageable) {
         return ecgValueRepository.findAll(pageable);
     }
-    public List<ECGValue> getECGValuesByWristbandId(int wristbandId) {
-        return ecgValueRepository.findByWristbandId(wristbandId);
+    public List<ECGValue> getECGValuesByWristband(Wristband wristband) {
+        return ecgValueRepository.findByWristband(wristband);
     }
-    public Page<ECGValue> getECGValuesByWristbandId(int wristbandId, Pageable pageable) {
-        return ecgValueRepository.findByWristbandId(wristbandId, pageable);
+    public Page<ECGValue> getECGValuesByWristband(Wristband wristband, Pageable pageable) {
+        return ecgValueRepository.findByWristband(wristband, pageable);
     }
 
     public List<HeartRateValue> getAllHeartRateValues() {
@@ -46,11 +43,11 @@ public class ValueService {
     public Page<HeartRateValue> getAllHeartRateValues(Pageable pageable) {
         return heartRateValueRepository.findAll(pageable);
     }
-    public List<HeartRateValue> getHeartRateValuesByWristbandId(int wristbandId) {
-        return heartRateValueRepository.findByWristbandId(wristbandId);
+    public List<HeartRateValue> getHeartRateValuesByWristband(Wristband wristband) {
+        return heartRateValueRepository.findByWristband(wristband);
     }
-    public Page<HeartRateValue> getHeartRateValuesByWristbandId(int wristbandId, Pageable pageable) {
-        return heartRateValueRepository.findByWristbandId(wristbandId, pageable);
+    public Page<HeartRateValue> getHeartRateValuesByWristband(Wristband wristband, Pageable pageable) {
+        return heartRateValueRepository.findByWristband(wristband, pageable);
     }
 
     public List<OxygenValue> getAllOxygenValues() {
@@ -59,11 +56,11 @@ public class ValueService {
     public Page<OxygenValue> getAllOxygenValues(Pageable pageable) {
         return oxygenValueRepository.findAll(pageable);
     }
-    public List<OxygenValue> getOxygenValuesByWristbandId(int wristbandId) {
-        return oxygenValueRepository.findByWristbandId(wristbandId);
+    public List<OxygenValue> getOxygenValuesByWristband(Wristband wristband) {
+        return oxygenValueRepository.findByWristband(wristband);
     }
-    public Page<OxygenValue> getOxygenValuesByWristbandId(int wristbandId, Pageable pageable) {
-        return oxygenValueRepository.findByWristbandId(wristbandId, pageable);
+    public Page<OxygenValue> getOxygenValuesByWristband(Wristband wristband, Pageable pageable) {
+        return oxygenValueRepository.findByWristband(wristband, pageable);
     }
 
     public List<SkinTempValue> getAllSkinTempValues() {
@@ -72,10 +69,10 @@ public class ValueService {
     public Page<SkinTempValue> getAllSkinTempValues(Pageable pageable) {
         return skinTempValueRepository.findAll(pageable);
     }
-    public List<SkinTempValue> getSkinTempValuesByWristbandId(int wristbandId) {
-        return skinTempValueRepository.findByWristbandId(wristbandId);
+    public List<SkinTempValue> getSkinTempValuesByWristband(Wristband wristband) {
+        return skinTempValueRepository.findByWristband(wristband);
     }
-    public Page<SkinTempValue> getSkinTempValuesByWristbandId(int wristbandId, Pageable pageable) {
-        return skinTempValueRepository.findByWristbandId(wristbandId, pageable);
+    public Page<SkinTempValue> getSkinTempValuesByWristband(Wristband wristband, Pageable pageable) {
+        return skinTempValueRepository.findByWristband(wristband, pageable);
     }
 }

@@ -10,10 +10,12 @@ public class BLEMeasurement {
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="WRISTBAND_ID")
-    private int wristbandId;
-    @Column(name="HUB_ID")
-    private int hubId;
+    @OneToOne
+    @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
+    private Wristband wristband;
+    @OneToOne
+    @JoinColumn(name="HUB_ID", referencedColumnName="ID")
+    private Hub hub;
     @Column(name="STRENGTH")
     private double strength;
     @Column(name="TIME_STAMP")
@@ -23,11 +25,11 @@ public class BLEMeasurement {
         super();
     }
 
-    public BLEMeasurement(int id, int wristbandId, int hubId, double strength, Timestamp timeStamp) {
+    public BLEMeasurement(int id, Wristband wristband, Hub hub, double strength, Timestamp timeStamp) {
         super();
         this.id = id;
-        this.wristbandId = wristbandId;
-        this.hubId = hubId;
+        this.wristband = wristband;
+        this.hub = hub;
         this.strength = strength;
         this.timeStamp = timeStamp;
     }
@@ -40,20 +42,20 @@ public class BLEMeasurement {
         this.id = id;
     }
 
-    public int getWristbandId() {
-        return wristbandId;
+    public Wristband getWristband() {
+        return wristband;
     }
 
-    public void setWristbandId(int wristbandId) {
-        this.wristbandId = wristbandId;
+    public void setWristband(Wristband wristband) {
+        this.wristband = wristband;
     }
 
-    public int getHubId() {
-        return hubId;
+    public Hub getHub() {
+        return hub;
     }
 
-    public void setHubId(int hubId) {
-        this.hubId = hubId;
+    public void setHub(Hub hub) {
+        this.hub = hub;
     }
 
     public double getStrength() {

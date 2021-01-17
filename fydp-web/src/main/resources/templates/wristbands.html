@@ -12,7 +12,7 @@
         </tr>
         <tr th:each="wristband:${wristbands}">
             <td th:text="${wristband.id}">id</td>
-            <td th:text="${wristband.userId}">userId</td>
+            <td th:text="${wristband.user.id}">userId</td>
         </tr>
     </table>
 </body>

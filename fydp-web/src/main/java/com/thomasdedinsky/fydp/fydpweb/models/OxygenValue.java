@@ -10,8 +10,9 @@ public class OxygenValue {
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="WRISTBAND_ID")
-    private int wristbandId;
+    @OneToOne
+    @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
+    private Wristband wristband;
     @Column(name="TIME_STAMP")
     private Timestamp timeStamp;
     @Column(name="VALUE")
@@ -21,10 +22,10 @@ public class OxygenValue {
         super();
     }
 
-    public OxygenValue(int id, int wristbandId, Timestamp timeStamp, double value) {
+    public OxygenValue(int id, Wristband wristband, Timestamp timeStamp, double value) {
         super();
         this.id = id;
-        this.wristbandId = wristbandId;
+        this.wristband = wristband;
         this.timeStamp = timeStamp;
         this.value = value;
     }
@@ -37,12 +38,12 @@ public class OxygenValue {
         this.id = id;
     }
 
-    public int getWristbandId() {
-        return wristbandId;
+    public Wristband getWristband() {
+        return wristband;
     }
 
-    public void setWristbandId(int wristbandId) {
-        this.wristbandId = wristbandId;
+    public void setWristband(Wristband wristband) {
+        this.wristband = wristband;
     }
 
     public Timestamp getTimeStamp() {

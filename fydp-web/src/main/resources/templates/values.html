@@ -14,7 +14,7 @@
     </tr>
     <tr th:each="value:${values}">
         <td th:text="${value.id}">id</td>
-        <td th:text="${value.wristbandId}">wristbandId</td>
+        <td th:text="${value.wristband.id}">wristbandId</td>
         <td th:text="${value.timeStamp}">timeStamp</td>
         <td th:text="${value.value}">value</td>
     </tr>

@@ -1,5 +1,7 @@
 package com.thomasdedinsky.fydp.fydpweb.models;
 
+import com.thomasdedinsky.fydp.fydpweb.auth.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,17 +11,18 @@ public class Wristband {
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="USER_ID")
-    private int userId;
+    @OneToOne
+    @JoinColumn(name="USER_ID", referencedColumnName="ID")
+    private User user;
 
     public Wristband() {
         super();
     }
 
-    public Wristband(int id, int userId) {
+    public Wristband(int id, User user) {
         super();
         this.id = id;
-        this.userId = userId;
+        this.user = user;
     }
 
     public int getId() {
@@ -30,11 +33,11 @@ public class Wristband {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

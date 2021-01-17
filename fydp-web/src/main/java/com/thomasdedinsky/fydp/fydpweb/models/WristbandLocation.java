@@ -10,8 +10,9 @@ public class WristbandLocation {
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="WRISTBAND_ID")
-    private int wristbandId;
+    @OneToOne
+    @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
+    private Wristband wristband;
     @Column(name="LOCATION_X")
     private double locationX;
     @Column(name="LOCATION_Y")
@@ -25,10 +26,10 @@ public class WristbandLocation {
         super();
     }
 
-    public WristbandLocation(int id, int wristbandId, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
+    public WristbandLocation(int id, Wristband wristband, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
         super();
         this.id = id;
-        this.wristbandId = wristbandId;
+        this.wristband = wristband;
         this.locationX = locationX;
         this.locationY = locationY;
         this.locationZ = locationZ;
@@ -43,12 +44,12 @@ public class WristbandLocation {
         this.id = id;
     }
 
-    public int getWristbandId() {
-        return wristbandId;
+    public Wristband getWristband() {
+        return wristband;
     }
 
-    public void setWristbandId(int wristbandId) {
-        this.wristbandId = wristbandId;
+    public void setWristband(Wristband wristband) {
+        this.wristband = wristband;
     }
 
     public double getLocationX() {

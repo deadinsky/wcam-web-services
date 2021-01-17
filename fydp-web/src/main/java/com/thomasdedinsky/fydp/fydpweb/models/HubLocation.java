@@ -10,8 +10,9 @@ public class HubLocation {
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="HUB_ID")
-    private int hubId;
+    @OneToOne
+    @JoinColumn(name="HUB_ID", referencedColumnName="ID")
+    private Hub hub;
     @Column(name="LOCATION_X")
     private double locationX;
     @Column(name="LOCATION_Y")
@@ -25,10 +26,10 @@ public class HubLocation {
         super();
     }
 
-    public HubLocation(int id, int hubId, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
+    public HubLocation(int id, Hub hub, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
         super();
         this.id = id;
-        this.hubId = hubId;
+        this.hub = hub;
         this.locationX = locationX;
         this.locationY = locationY;
         this.locationZ = locationZ;
@@ -43,12 +44,12 @@ public class HubLocation {
         this.id = id;
     }
 
-    public int getHubId() {
-        return hubId;
+    public Hub getHub() {
+        return hub;
     }
 
-    public void setHubId(int hubId) {
-        this.hubId = hubId;
+    public void setHub(Hub hub) {
+        this.hub = hub;
     }
 
     public double getLocationX() {
