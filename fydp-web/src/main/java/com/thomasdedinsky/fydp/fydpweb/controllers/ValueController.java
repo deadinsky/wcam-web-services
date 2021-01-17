@@ -1,8 +1,10 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
+import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
 import com.thomasdedinsky.fydp.fydpweb.services.ValueService;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +27,15 @@ public class ValueController {
     }
 
     @GetMapping
-    public String getValues(Model model, @RequestParam(name = "type") String type,
+    public String getValues(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal,
+                            @RequestParam(name = "type") String type,
                             @RequestParam(name = "pageSize") int pageSize,
                             @RequestParam(name = "pageNum") int pageNum,
                             @RequestParam(name = "wristband", required = false) Wristband wristband) {
         if ((pageSize < 1 || pageSize >= PAGE_SIZE_LIMIT) || pageNum < 0 || (wristband != null && wristband.getId() < 0)) {
+            return "values";
+        }
+        if (wristband == null && !userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
             return "values";
         }
         if (wristband == null) {
@@ -49,6 +55,10 @@ public class ValueController {
                 default:
                     break;
             }
+            return "values";
+        }
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) &&
+                !wristband.getUser().equals(userPrincipal.getUser())) {
             return "values";
         }
         switch (type) {
