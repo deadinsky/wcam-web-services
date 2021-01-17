@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.auth;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/confirm")
-    String confirmMail(@RequestParam("token") String token) {
+    public String confirmMail(@RequestParam("token") String token) {
         ConfirmationToken confirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
         if (confirmationToken != null) {
             userService.confirmUser(confirmationToken);

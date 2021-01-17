@@ -1,7 +1,9 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
+import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
 import com.thomasdedinsky.fydp.fydpweb.services.WristbandService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,8 @@ public class WristbandController {
     }
 
     @GetMapping
-    public String getAllWristbands(Model model) {
-        model.addAttribute("wristbands", wristbandService.getAllWristbands());
+    public String getWristbands(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        model.addAttribute("wristbands", wristbandService.getWristbandsByUser(userPrincipal.getUser()));
         return "wristbands";
     }
 }
