@@ -11,4 +11,6 @@ import java.util.List;
 public interface WristbandRepository extends JpaRepository<Wristband, Integer> {
     List<Wristband> findByUser(User user);
     Page<Wristband> findByUser(User user, Pageable pageable);
+    List<Wristband> findByIdNotIn(List<Integer> idList);
+    List<Wristband> findByIdNotInAndUser(List<Integer> idList, User user);
 }

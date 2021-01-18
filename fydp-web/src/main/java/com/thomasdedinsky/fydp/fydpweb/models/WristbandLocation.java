@@ -26,6 +26,16 @@ public class WristbandLocation {
         super();
     }
 
+    public WristbandLocation(Wristband wristband) {
+        super();
+        this.id = 0;
+        this.wristband = wristband;
+        this.locationX = 0;
+        this.locationY = 0;
+        this.locationZ = 0;
+        this.timeStamp = new Timestamp(0);
+    }
+
     public WristbandLocation(int id, Wristband wristband, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
         super();
         this.id = id;
@@ -46,6 +56,10 @@ public class WristbandLocation {
 
     public Wristband getWristband() {
         return wristband;
+    }
+
+    public int getWristbandId() {
+        return wristband.getId();
     }
 
     public void setWristband(Wristband wristband) {

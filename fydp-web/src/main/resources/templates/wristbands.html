@@ -5,15 +5,23 @@
     <title>Wristbands</title>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>User ID</th>
-        </tr>
-        <tr th:each="wristband:${wristbands}">
-            <td th:text="${wristband.id}">id</td>
-            <td th:text="${wristband.user.id}">userId</td>
-        </tr>
-    </table>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>X</th>
+        <th>Y</th>
+        <th>Z</th>
+        <th>Timestamp</th>
+    </tr>
+    <tr th:each="detailedWristband:${detailedWristbands}">
+        <td th:text="${detailedWristband.wristband.id}">id</td>
+        <td th:text="${detailedWristband.wristband.user.id}">userId</td>
+        <td th:text="${detailedWristband.locationX}">locationX</td>
+        <td th:text="${detailedWristband.locationY}">locationY</td>
+        <td th:text="${detailedWristband.locationZ}">locationZ</td>
+        <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
+    </tr>
+</table>
 </body>
 </html>

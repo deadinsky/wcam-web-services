@@ -26,6 +26,16 @@ public class HubLocation {
         super();
     }
 
+    public HubLocation(Hub hub) {
+        super();
+        this.id = 0;
+        this.hub = hub;
+        this.locationX = 0;
+        this.locationY = 0;
+        this.locationZ = 0;
+        this.timeStamp = new Timestamp(0);
+    }
+
     public HubLocation(int id, Hub hub, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
         super();
         this.id = id;
@@ -46,6 +56,10 @@ public class HubLocation {
 
     public Hub getHub() {
         return hub;
+    }
+
+    public int getHubId() {
+        return hub.getId();
     }
 
     public void setHub(Hub hub) {
