@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Locations</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>X</th>
+        <th>Y</th>
+        <th>Z</th>
+        <th>Timestamp</th>
+    </tr>
+    <tr th:each="location:${hubLocations}">
+        <td th:text="${location.hub}">id</td>
+        <td th:text="${location.locationX}">locationX</td>
+        <td th:text="${location.locationY}">locationY</td>
+        <td th:text="${location.locationZ}">locationZ</td>
+        <td th:text="${location.timeStamp}">timeStamp</td>
+    </tr>
+    <tr th:each="location:${wristbandLocations}">
+        <td th:text="${location.wristband}">id</td>
+        <td th:text="${location.locationX}">locationX</td>
+        <td th:text="${location.locationY}">locationY</td>
+        <td th:text="${location.locationZ}">locationZ</td>
+        <td th:text="${location.timeStamp}">timeStamp</td>
+    </tr>
+</table>
+</body>
+</html>

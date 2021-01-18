@@ -11,4 +11,6 @@ import java.util.List;
 public interface WristbandLocationRepository extends JpaRepository<WristbandLocation, Integer> {
     List<WristbandLocation> findByWristband(Wristband wristband);
     Page<WristbandLocation> findByWristband(Wristband wristband, Pageable pageable);
+    List<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList);
+    Page<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList, Pageable pageable);
 }
