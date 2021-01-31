@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Hub</title>
+</head>
+<body>
+<form th:action="@{/hubs/add}" method="post">
+    <div>
+        <label>Power: <input type="number" name="txPower"/></label>
+        <label>SPC: <input type="number" name="signalPropagationConstant"/></label>
+    </div>
+    <div>
+        <input type="submit" value="Add"/>
+    </div>
+</form>
+</body>
+</html>

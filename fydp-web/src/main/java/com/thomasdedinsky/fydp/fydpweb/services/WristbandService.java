@@ -26,6 +26,10 @@ public class WristbandService {
         this.wristbandLocationRepository = wristbandLocationRepository;
     }
 
+    public Wristband addWristband(Wristband wristband) {
+        return wristbandRepository.save(wristband);
+    }
+
     public List<Wristband> getAllWristbands() {
         return wristbandRepository.findAll();
     }

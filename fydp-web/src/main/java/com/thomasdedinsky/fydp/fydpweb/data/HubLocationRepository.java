@@ -15,6 +15,7 @@ public interface HubLocationRepository extends JpaRepository<HubLocation, Intege
     List<HubLocation> findByHub(Hub hub);
     Page<HubLocation> findByHub(Hub hub, Pageable pageable);
     List<HubLocation> findByIdIn(List<Integer> idList);
+    HubLocation findFirstByHubOrderByTimeStampDesc(Hub hub);
     @Query(value = "SELECT " +
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(h.id), h.hub) " +
             "FROM HubLocation h GROUP BY h.hub")

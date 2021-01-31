@@ -24,12 +24,28 @@ public class HubService {
         this.hubLocationRepository = hubLocationRepository;
     }
 
+    public Hub addHub(Hub hub) {
+        return hubRepository.save(hub);
+    }
+
+    public HubLocation addHubLocation(HubLocation hubLocation) {
+        return hubLocationRepository.save(hubLocation);
+    }
+
     public List<Hub> getAllHubs() {
         return hubRepository.findAll();
     }
 
     public Page<Hub> getAllHubs(Pageable pageable) {
         return hubRepository.findAll(pageable);
+    }
+
+    public HubLocation getDetailedHub(Hub hub) {
+        HubLocation hubLocation = hubLocationRepository.findFirstByHubOrderByTimeStampDesc(hub);
+        if (hubLocation == null) {
+            hubLocation = new HubLocation(hub);
+        }
+        return hubLocation;
     }
 
     public List<HubLocation> getAllDetailedHubs() {

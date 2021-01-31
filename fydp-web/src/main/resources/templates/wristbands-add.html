@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Wristband</title>
+</head>
+<body>
+    <form th:action="@{/wristbands/add}" method="post">
+        <div>
+            <label th:if="${isAdmin}">User ID: <input type="number" name="user"/></label>
+        </div>
+        <div>
+            <input type="submit" value="Add"/>
+        </div>
+    </form>
+</body>
+</html>
