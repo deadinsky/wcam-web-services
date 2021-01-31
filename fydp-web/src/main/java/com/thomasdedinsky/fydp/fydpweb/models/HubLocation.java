@@ -30,10 +30,6 @@ public class HubLocation {
         super();
         this.id = 0;
         this.hub = hub;
-        this.locationX = 0;
-        this.locationY = 0;
-        this.locationZ = 0;
-        this.timeStamp = new Timestamp(0);
     }
 
     public HubLocation(int id, Hub hub, double locationX, double locationY, double locationZ, Timestamp timeStamp) {

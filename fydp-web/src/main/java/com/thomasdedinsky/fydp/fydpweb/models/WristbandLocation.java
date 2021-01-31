@@ -21,6 +21,8 @@ public class WristbandLocation {
     private double locationZ;
     @Column(name="TIME_STAMP")
     private Timestamp timeStamp;
+    @Column(name="APPROXIMATE_DISTANCE_IN_METRES")
+    private double approximateDistanceInMetres;
 
     public WristbandLocation() {
         super();
@@ -30,13 +32,9 @@ public class WristbandLocation {
         super();
         this.id = 0;
         this.wristband = wristband;
-        this.locationX = 0;
-        this.locationY = 0;
-        this.locationZ = 0;
-        this.timeStamp = new Timestamp(0);
     }
 
-    public WristbandLocation(int id, Wristband wristband, double locationX, double locationY, double locationZ, Timestamp timeStamp) {
+    public WristbandLocation(int id, Wristband wristband, double locationX, double locationY, double locationZ, Timestamp timeStamp, double approximateDistanceInMetres) {
         super();
         this.id = id;
         this.wristband = wristband;
@@ -44,6 +42,7 @@ public class WristbandLocation {
         this.locationY = locationY;
         this.locationZ = locationZ;
         this.timeStamp = timeStamp;
+        this.approximateDistanceInMetres = approximateDistanceInMetres;
     }
 
     public int getId() {
@@ -96,5 +95,13 @@ public class WristbandLocation {
 
     public void setTimeStamp(Timestamp timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public double getApproximateDistanceInMetres() {
+        return approximateDistanceInMetres;
+    }
+
+    public void setApproximateDistanceInMetres(double approximateDistanceInMetres) {
+        this.approximateDistanceInMetres = approximateDistanceInMetres;
     }
 }

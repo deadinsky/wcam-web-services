@@ -12,14 +12,16 @@
         <th>X</th>
         <th>Y</th>
         <th>Z</th>
+        <th>Approx. Distance (m)</th>
         <th>Timestamp</th>
     </tr>
     <tr th:each="detailedWristband:${detailedWristbands}">
         <td th:text="${detailedWristband.wristband.id}">id</td>
-        <td th:text="${detailedWristband.wristband.user.id}">userId</td>
+        <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
         <td th:text="${detailedWristband.locationX}">locationX</td>
         <td th:text="${detailedWristband.locationY}">locationY</td>
         <td th:text="${detailedWristband.locationZ}">locationZ</td>
+        <td th:text="${detailedWristband.approximateDistanceInMetres}">distance</td>
         <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
     </tr>
 </table>
