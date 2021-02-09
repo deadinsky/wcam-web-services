@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -55,5 +57,13 @@ public class UserService implements UserDetailsService {
                 "Thank you for registering. Please click on the below link to activate your account." + "http://localhost:8083/sign-up/confirm?token="
                         + token);
         emailService.sendEmail(mailMessage);
+    }
+
+    public User getZeroUser() {
+        return userRepository.findById(0);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

@@ -2,6 +2,7 @@ package com.thomasdedinsky.fydp.fydpweb.controllers;
 
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
+import com.thomasdedinsky.fydp.fydpweb.auth.UserService;
 import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
 import com.thomasdedinsky.fydp.fydpweb.services.WristbandService;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +20,11 @@ import java.util.List;
 @RequestMapping("/wristbands")
 public class WristbandController {
     private final WristbandService wristbandService;
+    private final UserService userService;
 
-    public WristbandController(WristbandService wristbandService) {
+    public WristbandController(WristbandService wristbandService, UserService userService) {
         this.wristbandService = wristbandService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -47,5 +50,23 @@ public class WristbandController {
         }
         wristbandService.addWristband(wristband);
         return "redirect:/wristbands";
+    }
+
+    @RequestMapping("/modify")
+    public String modifyWristband(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
+            return "redirect:/wristbands";
+        }
+        model.addAttribute("detailedWristbands", wristbandService.getDetailedWristbandsByUser(userService.getZeroUser()));
+        return "wristbands-modify";
+    }
+
+    @PostMapping("/modify")
+    public String modifyWristband(Wristband wristband, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
+            return "redirect:/wristbands";
+        }
+        wristbandService.addWristband(wristband);
+        return "redirect:/wristbands/modify";
     }
 }

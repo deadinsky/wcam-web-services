@@ -17,7 +17,7 @@
     </tr>
     <tr th:each="detailedWristband:${detailedWristbands}">
         <td th:text="${detailedWristband.wristband.id}">id</td>
-        <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
+        <td th:text="${detailedWristband.wristband.user.id}">userId</td>
         <td th:text="${detailedWristband.locationX}">locationX</td>
         <td th:text="${detailedWristband.locationY}">locationY</td>
         <td th:text="${detailedWristband.locationZ}">locationZ</td>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Wristband</title>
+</head>
+<body>
+<form th:action="@{/wristbands/modify}" method="post">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>Z</th>
+            <th>Approx. Distance (m)</th>
+            <th>Timestamp</th>
+        </tr>
+        <tr th:each="detailedWristband:${detailedWristbands}">
+            <td th:text="${detailedWristband.wristband.id}">id</td>
+            <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
+            <td th:text="${detailedWristband.locationX}">locationX</td>
+            <td th:text="${detailedWristband.locationY}">locationY</td>
+            <td th:text="${detailedWristband.locationZ}">locationZ</td>
+            <td th:text="${detailedWristband.approximateDistanceInMetres}">distance</td>
+            <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
+        </tr>
+    </table>
+    <div>
+        <label>ID: <input type="number" step="1" name="id"/></label>
+        <label>User ID: <input type="number" step="1" name="user"/></label>
+    </div>
+    <div>
+        <input type="submit" value="Modify"/>
+    </div>
+</form>
+</body>
+</html>

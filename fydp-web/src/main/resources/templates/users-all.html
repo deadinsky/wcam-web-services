@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Email</th>
+        <th>Locked?</th>
+        <th>Enabled?</th>
+        <th>Manager?</th>
+        <th>Admin?</th>
+        <th>Notes</th>
+    </tr>
+    <tr th:each="user:${users}">
+        <td th:text="${user.id}">id</td>
+        <td th:text="${user.firstName}">firstName</td>
+        <td th:text="${user.lastName}">lastName</td>
+        <td th:text="${user.birthDate}">birthDate</td>
+        <td th:text="${user.email}">email</td>
+        <td th:text="${user.isLocked}">isLocked</td>
+        <td th:text="${user.isEnabled}">isEnabled</td>
+        <td th:text="${user.isManager}">isManager</td>
+        <td th:text="${user.isAdmin}">isAdmin</td>
+        <td th:text="${user.notes}">notes</td>
+    </tr>
+</table>
+</body>
+</html>
