@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface HeartRateValueRepository extends JpaRepository<HeartRateValue, Integer> {
+public interface HeartRateValueRepository extends JpaRepository<HeartRateValue, Long> {
     List<HeartRateValue> findByWristband(Wristband wristband);
     Page<HeartRateValue> findByWristband(Wristband wristband, Pageable pageable);
 }

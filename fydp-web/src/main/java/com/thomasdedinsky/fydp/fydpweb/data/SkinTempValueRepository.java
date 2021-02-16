@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SkinTempValueRepository extends JpaRepository<SkinTempValue, Integer> {
+public interface SkinTempValueRepository extends JpaRepository<SkinTempValue, Long> {
     List<SkinTempValue> findByWristband(Wristband wristband);
     Page<SkinTempValue> findByWristband(Wristband wristband, Pageable pageable);
 }

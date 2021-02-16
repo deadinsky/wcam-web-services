@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface WristbandLocationRepository extends JpaRepository<WristbandLocation, Integer> {
+public interface WristbandLocationRepository extends JpaRepository<WristbandLocation, Long> {
     List<WristbandLocation> findByWristband(Wristband wristband);
     Page<WristbandLocation> findByWristband(Wristband wristband, Pageable pageable);
     List<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList);
