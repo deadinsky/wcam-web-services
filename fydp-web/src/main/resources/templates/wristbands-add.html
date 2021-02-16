@@ -7,6 +7,7 @@
 <body>
     <form th:action="@{/wristbands/add}" method="post">
         <div>
+            <label>MAC (as int): <input type="number" name="id"/></label>
             <label th:if="${isAdmin}">User ID: <input type="number" name="user"/></label>
         </div>
         <div>

@@ -7,7 +7,7 @@
 <body>
 <table>
     <tr>
-        <th>ID</th>
+        <th>MAC Address</th>
         <th>User ID</th>
         <th>X</th>
         <th>Y</th>
@@ -16,7 +16,7 @@
         <th>Timestamp</th>
     </tr>
     <tr th:each="detailedWristband:${detailedWristbands}">
-        <td th:text="${detailedWristband.wristband.id}">id</td>
+        <td th:text="${detailedWristband.wristband.macAddress}">macAddress</td>
         <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
         <td th:text="${detailedWristband.locationX}">locationX</td>
         <td th:text="${detailedWristband.locationY}">locationY</td>

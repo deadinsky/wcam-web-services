@@ -14,7 +14,7 @@ import java.util.List;
 public interface HubLocationRepository extends JpaRepository<HubLocation, Integer> {
     List<HubLocation> findByHub(Hub hub);
     Page<HubLocation> findByHub(Hub hub, Pageable pageable);
-    List<HubLocation> findByIdIn(List<Integer> idList);
+    List<HubLocation> findByIdIn(List<Long> idList);
     HubLocation findFirstByHubOrderByTimeStampDesc(Hub hub);
     @Query(value = "SELECT " +
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(h.id), h.hub) " +

@@ -8,15 +8,17 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>Wristband ID</th>
+        <th>Wristband MAC</th>
         <th>Timestamp</th>
         <th>Value</th>
+        <th>Confidence</th>
     </tr>
     <tr th:each="value:${values}">
         <td th:text="${value.id}">id</td>
-        <td th:text="${value.wristband.id}">wristbandId</td>
+        <td th:text="${value.wristband.macAddress}">macAddress</td>
         <td th:text="${value.timeStamp}">timeStamp</td>
         <td th:text="${value.value}">value</td>
+        <td th:text="${value.confidence}">confidence</td>
     </tr>
 </table>
 </body>

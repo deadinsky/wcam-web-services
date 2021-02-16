@@ -9,7 +9,7 @@ public class ECGValue {
     @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @OneToOne
     @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
     private Wristband wristband;
@@ -17,24 +17,27 @@ public class ECGValue {
     private Timestamp timeStamp;
     @Column(name="VALUE")
     private double value;
+    @Column(name="CONFIDENCE")
+    private double confidence;
 
     public ECGValue() {
         super();
     }
 
-    public ECGValue(int id, Wristband wristband, Timestamp timeStamp, double value) {
+    public ECGValue(long id, Wristband wristband, Timestamp timeStamp, double value, double confidence) {
         super();
         this.id = id;
         this.wristband = wristband;
         this.timeStamp = timeStamp;
         this.value = value;
+        this.confidence = confidence;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -60,5 +63,13 @@ public class ECGValue {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public double getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(double confidence) {
+        this.confidence = confidence;
     }
 }

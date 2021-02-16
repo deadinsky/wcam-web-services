@@ -7,21 +7,21 @@
 <body>
 <table>
     <tr>
-        <th>ID</th>
+        <th>MAC Address</th>
         <th>X</th>
         <th>Y</th>
         <th>Z</th>
         <th>Timestamp</th>
     </tr>
     <tr th:each="location:${hubLocations}">
-        <td th:text="${location.hub.id}">id</td>
+        <td th:text="${location.hub.macAddress}">macAddress</td>
         <td th:text="${location.locationX}">locationX</td>
         <td th:text="${location.locationY}">locationY</td>
         <td th:text="${location.locationZ}">locationZ</td>
         <td th:text="${location.timeStamp}">timeStamp</td>
     </tr>
     <tr th:each="location:${wristbandLocations}">
-        <td th:text="${location.wristband.id}">id</td>
+        <td th:text="${location.wristband.macAddress}">macAddress</td>
         <td th:text="${location.locationX}">locationX</td>
         <td th:text="${location.locationY}">locationY</td>
         <td th:text="${location.locationZ}">locationZ</td>

@@ -9,7 +9,7 @@ public class User {
     @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column(name="FIRST_NAME")
     private String firstName;
     @Column(name="LAST_NAME")
@@ -35,7 +35,7 @@ public class User {
         super();
     }
 
-    public User(int id, String firstName, String lastName, Date birthDate, String notes, String email, String password,
+    public User(long id, String firstName, String lastName, Date birthDate, String notes, String email, String password,
                 boolean isLocked, boolean isEnabled, boolean isManager, boolean isAdmin) {
         super();
         this.id = id;
@@ -51,11 +51,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

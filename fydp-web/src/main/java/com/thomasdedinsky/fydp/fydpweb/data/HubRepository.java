@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface HubRepository extends JpaRepository<Hub, Integer> {
-    List<Hub> findByIdNotIn(List<Integer> idList);
+    List<Hub> findByIdNotIn(List<Long> idList);
 }

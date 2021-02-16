@@ -9,7 +9,7 @@ public class WristbandLocation {
     @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @OneToOne
     @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
     private Wristband wristband;
@@ -45,11 +45,11 @@ public class WristbandLocation {
         this.approximateDistanceInMetres = approximateDistanceInMetres;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,7 +57,7 @@ public class WristbandLocation {
         return wristband;
     }
 
-    public int getWristbandId() {
+    public long getWristbandId() {
         return wristband.getId();
     }
 

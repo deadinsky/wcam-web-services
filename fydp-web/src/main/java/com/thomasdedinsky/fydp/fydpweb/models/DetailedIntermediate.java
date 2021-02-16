@@ -1,14 +1,14 @@
 package com.thomasdedinsky.fydp.fydpweb.models;
 
 public class DetailedIntermediate {
-    private int maxId;
+    private long maxId;
     private Object o;
 
-    public DetailedIntermediate(int maxId, Object o) {
+    public DetailedIntermediate(long maxId, Object o) {
         this.maxId = maxId;
     }
 
-    public int getMaxId() {
+    public long getMaxId() {
         return maxId;
     }
 }

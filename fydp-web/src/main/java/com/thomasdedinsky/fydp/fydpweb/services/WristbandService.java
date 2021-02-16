@@ -48,16 +48,16 @@ public class WristbandService {
         if (detailedIntermediateList.size() == 0) {
             return wristbandRepository.findAll().stream().map(w -> new WristbandLocation(w)).collect(Collectors.toList());
         }
-        List<Integer> maxIds = detailedIntermediateList
+        List<Long> maxIds = detailedIntermediateList
                 .stream().map(di -> di.getMaxId()).collect(Collectors.toList());
         List<WristbandLocation> wristbandsWithLocation = Collections.synchronizedList(wristbandLocationRepository.findByIdIn(maxIds));
-        List<Integer> wristbandIdsToExclude = wristbandsWithLocation
+        List<Long> wristbandIdsToExclude = wristbandsWithLocation
                 .stream().map(wwl -> wwl.getWristband().getId()).collect(Collectors.toList());
         List<Wristband> wristbandsWithoutLocation = wristbandRepository.findByIdNotIn(wristbandIdsToExclude);
         wristbandsWithLocation.addAll(
                 wristbandsWithoutLocation.stream().map(wwl -> new WristbandLocation(wwl)).collect(Collectors.toList()));
         return wristbandsWithLocation
-                .stream().sorted(Comparator.comparingInt(WristbandLocation::getWristbandId)).collect(Collectors.toList());
+                .stream().sorted(Comparator.comparingLong(WristbandLocation::getWristbandId)).collect(Collectors.toList());
     }
 
     public List<WristbandLocation> getDetailedWristbandsByUser(User user) {
@@ -66,15 +66,15 @@ public class WristbandService {
         if (detailedIntermediateList.size() == 0) {
             return wristbandRepository.findByUser(user).stream().map(w -> new WristbandLocation(w)).collect(Collectors.toList());
         }
-        List<Integer> maxIds = detailedIntermediateList
+        List<Long> maxIds = detailedIntermediateList
                 .stream().map(di -> di.getMaxId()).collect(Collectors.toList());
         List<WristbandLocation> wristbandsWithLocation = Collections.synchronizedList(wristbandLocationRepository.findByIdIn(maxIds));
-        List<Integer> wristbandIdsToExclude = wristbandsWithLocation
+        List<Long> wristbandIdsToExclude = wristbandsWithLocation
                 .stream().map(wwl -> wwl.getWristband().getId()).collect(Collectors.toList());
         List<Wristband> wristbandsWithoutLocation = wristbandRepository.findByIdNotInAndUser(wristbandIdsToExclude, user);
         wristbandsWithLocation.addAll(
                 wristbandsWithoutLocation.stream().map(wwl -> new WristbandLocation(wwl)).collect(Collectors.toList()));
         return wristbandsWithLocation
-                .stream().sorted(Comparator.comparingInt(WristbandLocation::getWristbandId)).collect(Collectors.toList());
+                .stream().sorted(Comparator.comparingLong(WristbandLocation::getWristbandId)).collect(Collectors.toList());
     }
 }

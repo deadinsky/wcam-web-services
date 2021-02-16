@@ -54,15 +54,15 @@ public class HubService {
         if (detailedIntermediateList.size() == 0) {
             return hubRepository.findAll().stream().map(h -> new HubLocation(h)).collect(Collectors.toList());
         }
-        List<Integer> maxIds = detailedIntermediateList
+        List<Long> maxIds = detailedIntermediateList
                 .stream().map(di -> di.getMaxId()).collect(Collectors.toList());
         List<HubLocation> hubsWithLocation = Collections.synchronizedList(hubLocationRepository.findByIdIn(maxIds));
-        List<Integer> hubIdsToExclude = hubsWithLocation
+        List<Long> hubIdsToExclude = hubsWithLocation
                 .stream().map(hwl -> hwl.getHub().getId()).collect(Collectors.toList());
         List<Hub> hubsWithoutLocation = hubRepository.findByIdNotIn(hubIdsToExclude);
         hubsWithLocation.addAll(
                 hubsWithoutLocation.stream().map(hwl -> new HubLocation(hwl)).collect(Collectors.toList()));
         return hubsWithLocation
-                .stream().sorted(Comparator.comparingInt(HubLocation::getHubId)).collect(Collectors.toList());
+                .stream().sorted(Comparator.comparingLong(HubLocation::getHubId)).collect(Collectors.toList());
     }
 }

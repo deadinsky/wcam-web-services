@@ -7,7 +7,7 @@
 <body>
 <table>
     <tr>
-        <th>ID</th>
+        <th>MAC Address</th>
         <th>Power</th>
         <th>SPC</th>
         <th>X</th>
@@ -16,7 +16,7 @@
         <th>Timestamp</th>
     </tr>
     <tr th:each="detailedHub:${detailedHubs}">
-        <td th:text="${detailedHub.hub.id}">id</td>
+        <td th:text="${detailedHub.hub.macAddress}">macAddress</td>
         <td th:text="${detailedHub.hub.txPower}">txPower</td>
         <td th:text="${detailedHub.hub.signalPropagationConstant}">signalPropagationConstant</td>
         <td th:text="${detailedHub.locationX}">locationX</td>

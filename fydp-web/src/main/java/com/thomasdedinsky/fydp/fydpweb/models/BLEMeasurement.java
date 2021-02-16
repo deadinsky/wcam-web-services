@@ -9,7 +9,7 @@ public class BLEMeasurement {
     @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @OneToOne
     @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
     private Wristband wristband;
@@ -25,7 +25,7 @@ public class BLEMeasurement {
         super();
     }
 
-    public BLEMeasurement(int id, Wristband wristband, Hub hub, double strength, Timestamp timeStamp) {
+    public BLEMeasurement(long id, Wristband wristband, Hub hub, double strength, Timestamp timeStamp) {
         super();
         this.id = id;
         this.wristband = wristband;
@@ -34,11 +34,11 @@ public class BLEMeasurement {
         this.timeStamp = timeStamp;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

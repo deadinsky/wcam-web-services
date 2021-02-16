@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.models;
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
 
 import javax.persistence.*;
@@ -10,7 +11,8 @@ public class Hub {
     @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
+    private String macAddress;
     @Column(name="TX_POWER")
     private double txPower;
     @Column(name="SIGNAL_PROPAGATION_CONSTANT")
@@ -20,18 +22,25 @@ public class Hub {
         super();
     }
 
-    public Hub(int id, double txPower, double signalPropagationConstant) {
+    public Hub(long id, double txPower, double signalPropagationConstant) {
         super();
         this.id = id;
         this.txPower = txPower;
         this.signalPropagationConstant = signalPropagationConstant;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public String getMacAddress() {
+        if (macAddress == null) {
+            macAddress = Utilities.longToMacAddress(id);
+        }
+        return macAddress;
+    }
+
+    public void setId(long id) {
         this.id = id;
     }
 

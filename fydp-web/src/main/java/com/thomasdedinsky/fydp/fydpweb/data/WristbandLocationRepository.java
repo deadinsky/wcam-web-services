@@ -17,7 +17,7 @@ public interface WristbandLocationRepository extends JpaRepository<WristbandLoca
     Page<WristbandLocation> findByWristband(Wristband wristband, Pageable pageable);
     List<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList);
     Page<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList, Pageable pageable);
-    List<WristbandLocation> findByIdIn(List<Integer> idList);
+    List<WristbandLocation> findByIdIn(List<Long> idList);
     @Query(value = "SELECT " +
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(w.id), w.wristband) " +
             "FROM WristbandLocation w GROUP BY w.wristband")
