@@ -1,5 +1,8 @@
 package com.thomasdedinsky.fydp.fydpweb;
 
+import com.thomasdedinsky.fydp.fydpweb.auth.User;
+import org.springframework.ui.Model;
+
 public class Utilities {
     public static String longToMacAddress(long id) {
         String macAddressRaw = Long.toHexString(id);
@@ -64,5 +67,12 @@ public class Utilities {
             default:
                 return Long.toString(id);
         }
+    }
+
+    public static void addModelAttributes(Model model, User user) {
+        model.addAttribute("isAdmin", user.isAdmin());
+        model.addAttribute("isManager", user.isManager());
+        model.addAttribute("isEnabled", user.isEnabled());
+        model.addAttribute("isLoggedOut", false);
     }
 }

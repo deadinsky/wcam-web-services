@@ -5,14 +5,15 @@
     <title>Login</title>
 </head>
 <body>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>Username: <input type="text" name="username"/></label>
-            <label>Password: <input type="password" name="password"/></label>
-        </div>
-        <div>
-            <input type="submit" value="Login"/>
-        </div>
-    </form>
+<header><div><h6><a th:href="@{/signup}">Signup</a></h6></div></header>
+<form th:action="@{/login}" method="post">
+    <div>
+        <label>Username: <input type="text" name="username"/></label>
+        <label>Password: <input type="password" name="password"/></label>
+    </div>
+    <div>
+        <input type="submit" value="Login"/>
+    </div>
+</form>
 </body>
 </html>

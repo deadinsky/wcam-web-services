@@ -5,6 +5,7 @@
     <title>Add Hub</title>
 </head>
 <body>
+<header th:replace="../fragments/general.html :: header"></header>
 <form th:action="@{/hubs/add}" method="post">
     <div>
         <label>MAC (as int): <input type="number" name="id"/></label>

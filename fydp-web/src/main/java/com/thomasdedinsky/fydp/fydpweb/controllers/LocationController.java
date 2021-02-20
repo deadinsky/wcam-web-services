@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Hub;
 import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
@@ -29,6 +30,7 @@ public class LocationController {
                                @RequestParam(name = "pageNum") int pageNum,
                                @RequestParam(name = "hub", required = false) Hub hub,
                                @RequestParam(name = "wristband", required = false) Wristband wristband) {
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         if ((pageSize < 1 || pageSize >= PAGE_SIZE_LIMIT) || pageNum < 0) {
             return "locations";
         }

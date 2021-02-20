@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserService;
@@ -29,6 +30,7 @@ public class WristbandController {
 
     @GetMapping
     public String getWristbands(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) ||
                 userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             model.addAttribute("detailedWristbands", wristbandService.getAllDetailedWristbands());
@@ -40,6 +42,7 @@ public class WristbandController {
 
     @RequestMapping("/add")
     public String addWristband(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         model.addAttribute("isAdmin", userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin));
         return "wristbands-add";
     }
@@ -58,6 +61,7 @@ public class WristbandController {
         if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/wristbands";
         }
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         model.addAttribute("detailedWristbands", wristbandService.getDetailedWristbandsByUser(userService.getZeroUser()));
         return "wristbands-modify";
     }

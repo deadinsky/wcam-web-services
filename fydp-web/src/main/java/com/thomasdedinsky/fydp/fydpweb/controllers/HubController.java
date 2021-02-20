@@ -1,6 +1,7 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Hub;
 import com.thomasdedinsky.fydp.fydpweb.models.HubLocation;
@@ -27,6 +28,7 @@ public class HubController {
 
     @GetMapping
     public String getHubs(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
             model.addAttribute("detailedHubs", hubService.getAllDetailedHubs());
         }
@@ -35,10 +37,11 @@ public class HubController {
 
     @RequestMapping("/add")
     public String addHub(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
-            return "hubs-add";
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
+            return "redirect:/hubs";
         }
-        return "redirect:/hubs";
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
+        return "hubs-add";
     }
 
     @PostMapping("/add")
@@ -51,11 +54,12 @@ public class HubController {
 
     @RequestMapping("/modify/{hub}")
     public String modifyHub(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Hub hub) {
-        if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) && hub != null) {
-            model.addAttribute("detailedHub", hubService.getDetailedHub(hub));
-            return "hubs-modify";
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) || hub == null) {
+            return "redirect:/hubs";
         }
-        return "redirect:/hubs";
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
+        model.addAttribute("detailedHub", hubService.getDetailedHub(hub));
+        return "hubs-modify";
     }
 
     @PostMapping("/modify/{hub}")

@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
 import com.thomasdedinsky.fydp.fydpweb.services.ValueService;
@@ -32,6 +33,7 @@ public class ValueController {
                             @RequestParam(name = "pageSize") int pageSize,
                             @RequestParam(name = "pageNum") int pageNum,
                             @RequestParam(name = "wristband", required = false) Wristband wristband) {
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         if ((pageSize < 1 || pageSize >= PAGE_SIZE_LIMIT) || pageNum < 0 || (wristband != null && wristband.getId() < 0)) {
             return "values";
         }

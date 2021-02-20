@@ -5,6 +5,7 @@
     <title>Modify Hub</title>
 </head>
 <body>
+<header th:replace="../fragments/general.html :: header"></header>
 <form th:action="@{/hubs/modify/} + ${detailedHub.hub.id}" method="post">
     <table>
         <tr>

@@ -5,14 +5,15 @@
     <title>Add Wristband</title>
 </head>
 <body>
-    <form th:action="@{/wristbands/add}" method="post">
-        <div>
-            <label>MAC (as int): <input type="number" name="id"/></label>
-            <label th:if="${isAdmin}">User ID: <input type="number" name="user"/></label>
-        </div>
-        <div>
-            <input type="submit" value="Add"/>
-        </div>
-    </form>
+<header th:replace="../fragments/general.html :: header"></header>
+<form th:action="@{/wristbands/add}" method="post">
+    <div>
+        <label>MAC (as int): <input type="number" name="id"/></label>
+        <label th:if="${isAdmin}">User ID: <input type="number" name="user"/></label>
+    </div>
+    <div>
+        <input type="submit" value="Add"/>
+    </div>
+</form>
 </body>
 </html>

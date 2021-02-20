@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.controllers;
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserService;
@@ -27,6 +28,7 @@ public class ProfileController {
         if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/profiles/" + userPrincipal.getUser().getId();
         }
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         model.addAttribute("users", userService.getAllUsers());
         return "users-all";
     }
@@ -36,6 +38,7 @@ public class ProfileController {
         if (!userPrincipal.getUser().equals(user) && !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/profiles/" + userPrincipal.getUser().getId();
         }
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
         model.addAttribute("user", user);
         model.addAttribute("detailedWristbands", wristbandService.getDetailedWristbandsByUser(user));
         return "users-one";
