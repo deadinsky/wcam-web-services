@@ -21,25 +21,58 @@ import java.util.List;
 @RequestMapping("/values")
 public class ValueController {
     private final ValueService valueService;
-    private final int PAGE_SIZE_LIMIT = 100;
+    private final static int PAGE_SIZE_LIMIT = 100;
 
     public ValueController(ValueService valueService) {
         this.valueService = valueService;
     }
 
+    public static String redirectWithParams(String type, int pageSize, int pageNum, Wristband wristband) {
+        boolean willRedirect = false;
+        if (type == null || (!type.equals("ecg") && !type.equals("heartrate") &&
+                !type.equals("oxygen") && !type.equals("skintemp"))) {
+            willRedirect = true;
+            type = "ecg";
+        }
+        if (pageSize < 1) {
+            willRedirect = true;
+            pageSize = 1;
+        }
+        if (pageSize > PAGE_SIZE_LIMIT) {
+            willRedirect = true;
+            pageSize = PAGE_SIZE_LIMIT;
+        }
+        if (pageNum < 0) {
+            willRedirect = true;
+            pageNum = 0;
+        }
+        String redirectString = String.format("redirect:/values?type=%s&pageSize=%d&pageNum=%d",
+                type, pageSize, pageNum);
+        if (wristband != null) {
+            if (wristband.getId() < 0) {
+                willRedirect = true;
+            } else {
+                redirectString += "&wristband=" + wristband.getId();
+            }
+        }
+        return (willRedirect ? redirectString : "");
+    }
+
     @GetMapping
     public String getValues(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal,
-                            @RequestParam(name = "type") String type,
-                            @RequestParam(name = "pageSize") int pageSize,
-                            @RequestParam(name = "pageNum") int pageNum,
+                            @RequestParam(name = "type", required = false) String type,
+                            @RequestParam(name = "pageSize", defaultValue = "-1") int pageSize,
+                            @RequestParam(name = "pageNum", defaultValue = "-1") int pageNum,
                             @RequestParam(name = "wristband", required = false) Wristband wristband) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) && (wristband == null ||
+                !wristband.getUser().equals(userPrincipal.getUser()))) {
+            return "redirect:/";
+        }
+        String redirectString = redirectWithParams(type, pageSize, pageNum, wristband);
+        if (!redirectString.equals("")) {
+            return redirectString;
+        }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
-        if ((pageSize < 1 || pageSize >= PAGE_SIZE_LIMIT) || pageNum < 0 || (wristband != null && wristband.getId() < 0)) {
-            return "values";
-        }
-        if (wristband == null && !userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
-            return "values";
-        }
         if (wristband == null) {
             switch (type) {
                 case "ecg":
@@ -57,10 +90,6 @@ public class ValueController {
                 default:
                     break;
             }
-            return "values";
-        }
-        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) &&
-                !wristband.getUser().equals(userPrincipal.getUser())) {
             return "values";
         }
         switch (type) {

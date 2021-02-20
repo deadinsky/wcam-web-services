@@ -38,6 +38,9 @@ public class ProfileController {
         if (!userPrincipal.getUser().equals(user) && !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/profiles/" + userPrincipal.getUser().getId();
         }
+        if (user == null) {
+            return "redirect:/profiles";
+        }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
         model.addAttribute("user", user);
         model.addAttribute("detailedWristbands", wristbandService.getDetailedWristbandsByUser(user));

@@ -8,7 +8,7 @@
     <div>
         <h6 th:if="${isAdmin}"><a th:href="@{/hubs}">Hubs</a></h6>
         <h6 th:if="${isAdmin}"><a th:href="@{/locations}">Locations</a></h6>
-        <h6 th:if="${isAdmin}"><a th:href="@{/values}">Values</a></h6>
+        <h6 th:if="${isEnabled}"><a th:href="@{/values}">Values</a></h6>
         <h6 th:if="${isEnabled}"><a th:href="@{/wristbands}">Wristbands</a></h6>
         <h6 th:if="${isManager}"><a th:href="@{/wristbands/modify}">::Assign</a></h6>
         <h6 th:if="${isManager}"><a th:href="@{/profiles}">Users</a></h6>
