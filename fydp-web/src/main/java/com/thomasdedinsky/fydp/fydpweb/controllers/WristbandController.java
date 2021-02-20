@@ -29,7 +29,8 @@ public class WristbandController {
 
     @GetMapping
     public String getWristbands(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
+        if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) ||
+                userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             model.addAttribute("detailedWristbands", wristbandService.getAllDetailedWristbands());
         } else {
             model.addAttribute("detailedWristbands", wristbandService.getDetailedWristbandsByUser(userPrincipal.getUser()));
