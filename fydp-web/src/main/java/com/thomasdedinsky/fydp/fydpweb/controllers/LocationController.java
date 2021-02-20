@@ -47,12 +47,12 @@ public class LocationController {
                 break;
             case "wristband":
                 if (userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
-                    if (hub == null) {
+                    if (wristband == null) {
                         model.addAttribute("wristbandLocations", locationService.getAllWristbandLocations(PageRequest.of(pageNum, pageSize)));
                     } else {
                         model.addAttribute("wristbandLocations", locationService.getWristbandLocationsByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                     }
-                } else if (hub != null) {
+                } else if (wristband != null) {
                     model.addAttribute("wristbandLocations", locationService.getWristbandLocationsByUser(userPrincipal.getUser(), PageRequest.of(pageNum, pageSize)));
                 }
                 break;
