@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alerts</title>
+</head>
+<body>
+<header th:replace="../fragments/general.html :: header"></header>
+<table>
+    <tr>
+        <th>Message</th>
+        <th>Is Severe?</th>
+        <th>Is Active?</th>
+        <th>Timestamp</th>
+    </tr>
+    <tr th:each="alert:${alerts}">
+        <td th:text="${alert.id}">id</td>
+        <td th:text="${alert.isSevere}">isSevere</td>
+        <td th:text="${alert.isActive}">isActive</td>
+        <td th:text="${alert.timeStamp}">timeStamp</td>
+    </tr>
+</table>
+</body>
+</html>
