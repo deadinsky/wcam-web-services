@@ -8,13 +8,14 @@
 <header th:replace="../fragments/general.html :: header"></header>
 <form th:action="@{/hubs/add}" method="post">
     <div>
-        <label>MAC (as int): <input type="number" name="id"/></label>
-        <label>Power: <input type="number" name="txPower"/></label>
-        <label>SPC: <input type="number" name="signalPropagationConstant"/></label>
+        <label>MAC (as int): <input type="number" step="1" name="id"/></label>
+        <label>Power: <input type="number" step="any" name="txPower"/></label>
+        <label>SPC: <input type="number" step="any" name="signalPropagationConstant"/></label>
     </div>
     <div>
         <input type="submit" value="Add"/>
     </div>
 </form>
+<footer th:replace="../fragments/general.html :: footer"></footer>
 </body>
 </html>

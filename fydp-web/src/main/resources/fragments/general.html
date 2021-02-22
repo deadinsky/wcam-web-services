@@ -12,22 +12,15 @@
         <h6 th:if="${isEnabled}"><a th:href="@{/wristbands}">Wristbands</a></h6>
         <h6 th:if="${isManager}"><a th:href="@{/wristbands/modify}">::Assign</a></h6>
         <h6 th:if="${isAdmin || isManager}"><a th:href="@{/alerts}">Alerts</a></h6>
+        <h6 th:if="${isAdmin || isManager}"><a th:href="@{/alerts/modify}">::Modify</a></h6>
         <h6 th:if="${isEnabled && !isManager}"><a th:href="@{/profiles}">Profile</a></h6>
         <h6 th:if="${isEnabled}"><a th:href="@{/logout}">Logout</a></h6>
         <h6 th:if="${isLoggedOut}"><a th:href="@{/login}">Login</a></h6>
         <h6 th:if="${isLoggedOut}"><a th:href="@{/signup}">Signup</a></h6>
     </div>
 </header>
-<p>Go to the next page to see fragments in action</p>
-<aside>
-    <div>This is a sidebar</div>
-</aside>
-<div class="another">This is another sidebar</div>
-<footer th:fragment="footer">
-    <a th:href="@{/fragments}">Fragments Index</a> |
-    <a th:href="@{/markup}">Markup inclussion</a> |
-    <a th:href="@{/params}">Fragment params</a> |
-    <a th:href="@{/other}">Other</a>
+<footer th:fragment="footer" th:if="${existsActiveSevereAlert}">
+    <h6 th:text="${alertText}">alertText</h6>
 </footer>
 </body>
 </html>

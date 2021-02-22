@@ -11,9 +11,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -32,14 +34,34 @@ public class AlertController {
             return "redirect:/";
         }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
-        List<Alert> alerts = alertService.getAllAlerts();
-        model.addAttribute("alerts", alerts);
-        alertService.updateAlert(alerts.get(0));
+        model.addAttribute("alerts", alertService.getAllAlerts());
         return "alerts";
     }
 
-    @PostMapping
-    public void updateAlert(Alert alert) {
-        alertService.updateAlert(alert);
+    @GetMapping("/modify")
+    public String modifyAlert(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) &&
+                !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
+            return "redirect:/";
+        }
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
+        return "alerts-modify";
+    }
+
+    @PostMapping("/modify")
+    public String modifyAlert(Alert alert, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) &&
+                !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
+            return "redirect:/";
+        }
+        alert.setTimeStamp(new Timestamp(System.currentTimeMillis()));
+        alertService.modifyAlert(alert);
+        return "redirect:/alerts";
+    }
+
+    @GetMapping("/refresh/{message}")
+    public String refreshAlert(Model model, @PathVariable String message) {
+        alertService.refreshAlert(message);
+        return "blank";
     }
 }

@@ -8,10 +8,10 @@
 <header><div><h6><a th:href="@{/login}">Login</a></h6></div></header>
 <form th:action="@{/signup}" method="post">
     <div>
-        <label>First Name: <input type="text" name="firstName"/></label>
-        <label>Last Name: <input type="text" name="lastName"/></label>
-        <label>Email: <input type="text" name="email"/></label>
-        <label>Password: <input type="password" name="password"/></label>
+        <label>First Name: <input type="text" name="firstName" required/></label>
+        <label>Last Name: <input type="text" name="lastName" required/></label>
+        <label>Email: <input type="text" name="email" required/></label>
+        <label>Password: <input type="password" name="password" required/></label>
     </div>
     <div>
         <input type="submit" value="Signup"/>

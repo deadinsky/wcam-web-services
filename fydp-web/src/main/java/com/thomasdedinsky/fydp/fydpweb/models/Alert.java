@@ -10,12 +10,13 @@ import java.sql.Timestamp;
 public class Alert {
     @Id
     @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @Column(name="IS_SEVERE")
     private boolean isSevere;
+    private String isSevereString;
     @Column(name="IS_ACTIVE")
     private boolean isActive;
+    private String isActiveString;
     @Column(name="TIME_STAMP")
     private Timestamp timeStamp;
 
@@ -47,12 +48,22 @@ public class Alert {
         isSevere = severe;
     }
 
+    public void setIsSevereString(String isSevereString) {
+        this.isSevereString = isSevereString;
+        this.isSevere = "on".equals(isSevereString);
+    }
+
     public boolean isActive() {
         return isActive;
     }
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public void setIsActiveString(String isActiveString) {
+        this.isActiveString = isActiveString;
+        this.isActive = "on".equals(isActiveString);
     }
 
     public Timestamp getTimeStamp() {

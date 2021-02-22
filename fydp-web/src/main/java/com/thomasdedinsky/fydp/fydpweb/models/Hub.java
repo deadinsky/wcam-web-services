@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class Hub {
     @Id
     @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String macAddress;
     @Column(name="TX_POWER")

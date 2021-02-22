@@ -1,9 +1,17 @@
 package com.thomasdedinsky.fydp.fydpweb;
 
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
+import com.thomasdedinsky.fydp.fydpweb.models.Alert;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utilities {
+    public static List<String> activeSevereAlertsText = new ArrayList<>();
+    public static boolean existsActiveSevereAlert = false;
+    public static String alertText = "";
+
     public static String longToMacAddress(long id) {
         String macAddressRaw = Long.toHexString(id);
         //Only a few cases, might as well do it using a switch statement
@@ -74,5 +82,32 @@ public class Utilities {
         model.addAttribute("isManager", user.isManager());
         model.addAttribute("isEnabled", user.isEnabled());
         model.addAttribute("isLoggedOut", false);
+        model.addAttribute("existsActiveSevereAlert", existsActiveSevereAlert);
+        model.addAttribute("alertText", alertText);
+    }
+
+    public static void initializeAlerts(List<Alert> alerts) {
+        activeSevereAlertsText = new ArrayList<>();
+        for (Alert a : alerts) {
+            if (a.isActive() && a.isSevere()) {
+                activeSevereAlertsText.add(a.getId());
+            }
+        }
+        alertText = String.join(" | ", activeSevereAlertsText);
+        existsActiveSevereAlert = activeSevereAlertsText.size() > 0;
+    }
+
+    public static boolean refreshAlert(Alert alert) {
+        if (!alert.isSevere() || (alert.isActive() == activeSevereAlertsText.contains(alert.getId()))) {
+            return false;
+        }
+        if (alert.isActive()) {
+            activeSevereAlertsText.add(alert.getId());
+        } else {
+            activeSevereAlertsText.remove(alert.getId());
+        }
+        alertText = String.join(" | ", activeSevereAlertsText);
+        existsActiveSevereAlert = activeSevereAlertsText.size() > 0;
+        return true;
     }
 }

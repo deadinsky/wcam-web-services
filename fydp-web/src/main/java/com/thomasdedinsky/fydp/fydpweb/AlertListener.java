@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class AlertListener implements ApplicationListener<AlertEvent> {
     @Override
     public void onApplicationEvent(AlertEvent alertEvent) {
-        System.out.println("Received spring custom event - " + alertEvent.getAlert().getId());
+        Utilities.refreshAlert(alertEvent.getAlert());
     }
 }

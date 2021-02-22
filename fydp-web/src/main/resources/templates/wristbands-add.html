@@ -8,12 +8,13 @@
 <header th:replace="../fragments/general.html :: header"></header>
 <form th:action="@{/wristbands/add}" method="post">
     <div>
-        <label>MAC (as int): <input type="number" name="id"/></label>
-        <label th:if="${isAdmin}">User ID: <input type="number" name="user"/></label>
+        <label>MAC (as int): <input type="number" step="1" name="id"/></label>
+        <label th:if="${isAdmin}">User ID: <input type="number" step="1" name="user"/></label>
     </div>
     <div>
         <input type="submit" value="Add"/>
     </div>
 </form>
+<footer th:replace="../fragments/general.html :: footer"></footer>
 </body>
 </html>
