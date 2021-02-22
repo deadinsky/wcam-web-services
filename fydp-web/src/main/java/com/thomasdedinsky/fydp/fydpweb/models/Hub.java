@@ -39,6 +39,11 @@ public class Hub {
         return macAddress;
     }
 
+    public void setMacAddress(String macAddress) {
+        this.macAddress = macAddress;
+        this.id = Utilities.macAddressToLong(macAddress);
+    }
+
     public void setId(long id) {
         this.id = id;
     }

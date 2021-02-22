@@ -8,7 +8,7 @@
 <header th:replace="../fragments/general.html :: header"></header>
 <form th:action="@{/hubs/add}" method="post">
     <div>
-        <label>MAC (as int): <input type="number" step="1" name="id"/></label>
+        <label>MAC: <input type="text" name="macAddress" pattern="([0-9A-F]{2}:){5}[0-9A-F]{2}"/></label>
         <label>Power: <input type="number" step="any" name="txPower"/></label>
         <label>SPC: <input type="number" step="any" name="signalPropagationConstant"/></label>
     </div>

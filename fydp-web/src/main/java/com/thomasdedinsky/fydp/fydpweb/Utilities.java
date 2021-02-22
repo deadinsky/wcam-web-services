@@ -77,6 +77,19 @@ public class Utilities {
         }
     }
 
+    public static long macAddressToLong(String macAddress) {
+        if (macAddress.length() != 17) {
+            return -1;
+        }
+        String macAddressRaw = "" + macAddress.charAt(0) + macAddress.charAt(1)
+                + macAddress.charAt(3) + macAddress.charAt(4)
+                + macAddress.charAt(6) + macAddress.charAt(7)
+                + macAddress.charAt(9) + macAddress.charAt(10)
+                + macAddress.charAt(12) + macAddress.charAt(13)
+                + macAddress.charAt(15) + macAddress.charAt(16);
+        return Long.parseLong(macAddressRaw, 16);
+    }
+
     public static void addModelAttributes(Model model, User user) {
         model.addAttribute("isAdmin", user.isAdmin());
         model.addAttribute("isManager", user.isManager());
