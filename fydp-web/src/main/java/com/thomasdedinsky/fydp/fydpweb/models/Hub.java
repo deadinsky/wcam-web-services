@@ -12,6 +12,8 @@ public class Hub {
     @Column(name="ID")
     private long id;
     private String macAddress;
+    @Column(name="NICKNAME")
+    private String nickname;
     @Column(name="TX_POWER")
     private double txPower;
     @Column(name="SIGNAL_PROPAGATION_CONSTANT")
@@ -21,15 +23,20 @@ public class Hub {
         super();
     }
 
-    public Hub(long id, double txPower, double signalPropagationConstant) {
+    public Hub(long id, String nickname, double txPower, double signalPropagationConstant) {
         super();
         this.id = id;
+        this.nickname = nickname;
         this.txPower = txPower;
         this.signalPropagationConstant = signalPropagationConstant;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMacAddress() {
@@ -44,8 +51,12 @@ public class Hub {
         this.id = Utilities.macAddressToLong(macAddress);
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public double getTxPower() {

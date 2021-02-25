@@ -9,6 +9,7 @@
 <form th:action="@{/wristbands/add}" method="post">
     <div>
         <label>MAC: <input type="text" name="macAddress" pattern="([0-9A-F]{2}:){5}[0-9A-F]{2}"/></label>
+        <label>Name: <input type="text" name="nickname" minlength="1" maxlength="255"/></label>
         <label th:if="${isAdmin}">User ID: <input type="number" step="1" name="user"/></label>
     </div>
     <div>

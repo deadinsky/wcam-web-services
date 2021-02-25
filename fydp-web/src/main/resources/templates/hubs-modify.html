@@ -10,6 +10,7 @@
     <table>
         <tr>
             <th>MAC Address</th>
+            <th>Name</th>
             <th>Power</th>
             <th>SPC</th>
             <th>X</th>
@@ -19,6 +20,7 @@
         </tr>
         <tr>
             <td th:text="${detailedHub.hub.macAddress}">macAddress</td>
+            <td th:text="${detailedHub.hub.nickname}">nickname</td>
             <td th:text="${detailedHub.hub.txPower}">txPower</td>
             <td th:text="${detailedHub.hub.signalPropagationConstant}">signalPropagationConstant</td>
             <td th:text="${detailedHub.locationX}">locationX</td>

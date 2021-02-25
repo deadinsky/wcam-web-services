@@ -12,12 +12,21 @@ public class Wristband {
     @Column(name="ID")
     private long id;
     private String macAddress;
+    @Column(name="NICKNAME")
+    private String nickname;
     @OneToOne
     @JoinColumn(name="USER_ID", referencedColumnName="ID")
     private User user;
 
     public Wristband() {
         super();
+    }
+
+    public Wristband(long id, String nickname, User user) {
+        super();
+        this.id = id;
+        this.nickname = nickname;
+        this.user = user;
     }
 
     public Wristband(long id, User user) {
@@ -28,6 +37,10 @@ public class Wristband {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getMacAddress() {
@@ -42,8 +55,12 @@ public class Wristband {
         this.id = Utilities.macAddressToLong(macAddress);
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public User getUser() {
