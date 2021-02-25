@@ -6,6 +6,17 @@
 </head>
 <body>
 <header th:replace="../fragments/general.html :: header"></header>
+<form th:action="@{/locations}" method="get">
+    <label>Type: <select name="type">
+        <option value="hub">Hub</option>
+        <option value="wristband">Wristband</option>
+    </select></label>
+    <label>Page Num: <input type="number" step="1" name="pageNum"/></label>
+    <label>Page Size: <input type="number" step="1" name="pageSize"/></label>
+    <label>Wristband ID: <input type="number" step="1" name="wristband"/></label>
+    <label>Hub ID: <input type="number" step="1" name="hub"/></label>
+    <input type="submit" value="Search"/>
+</form>
 <table>
     <tr>
         <th>MAC Address</th>

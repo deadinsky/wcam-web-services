@@ -6,6 +6,19 @@
 </head>
 <body>
 <header th:replace="../fragments/general.html :: header"></header>
+<form th:action="@{/values}" method="get">
+    <label>Type: <select name="type">
+        <option value="ecg">ECG</option>
+        <option value="heartrate">Heart Rate</option>
+        <option value="oxygen">Sp02</option>
+        <option value="skintemp">Skin Temp.</option>
+    </select></label>
+    <label>Page Num: <input type="number" step="1" name="pageNum"/></label>
+    <label>Page Size: <input type="number" step="1" name="pageSize"/></label>
+    <label>Wristband ID: <input type="number" step="1" name="wristband"/></label>
+    <label>Hub ID: <input type="number" step="1" name="hub"/></label>
+    <input type="submit" value="Search"/>
+</form>
 <table>
     <tr>
         <th>ID</th>
