@@ -18,7 +18,10 @@
         <th>Timestamp</th>
     </tr>
     <tr th:each="detailedHub:${detailedHubs}">
-        <td th:text="${detailedHub.hub.macAddress}">macAddress</td>
+        <td>
+            <a th:text="${detailedHub.hub.macAddress}"
+               th:href="@{/hubs/modify/{id}(id=${detailedHub.hub.id})}">macAddress</a>
+        </td>
         <td th:text="${detailedHub.hub.nickname}">nickname</td>
         <td th:text="${detailedHub.hub.txPower}">txPower</td>
         <td th:text="${detailedHub.hub.signalPropagationConstant}">signalPropagationConstant</td>

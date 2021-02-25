@@ -15,14 +15,20 @@
         <th>Timestamp</th>
     </tr>
     <tr th:each="location:${hubLocations}">
-        <td th:text="${location.hub.macAddress}">macAddress</td>
+        <td>
+            <a th:text="${location.hub.macAddress}"
+               th:href="@{/hubs/modify/{id}(id=${location.hub.id})}">macAddress</a>
+        </td>
         <td th:text="${location.locationX}">locationX</td>
         <td th:text="${location.locationY}">locationY</td>
         <td th:text="${location.locationZ}">locationZ</td>
         <td th:text="${location.timeStamp}">timeStamp</td>
     </tr>
     <tr th:each="location:${wristbandLocations}">
-        <td th:text="${location.wristband.macAddress}">macAddress</td>
+        <td>
+            <a th:text="${location.wristband.macAddress}"
+               th:href="@{/wristbands/{id}(id=${location.wristband.id})}">macAddress</a>
+        </td>
         <td th:text="${location.locationX}">locationX</td>
         <td th:text="${location.locationY}">locationY</td>
         <td th:text="${location.locationZ}">locationZ</td>

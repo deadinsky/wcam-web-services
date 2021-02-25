@@ -12,7 +12,6 @@
         <h6 th:if="${isEnabled}"><a th:href="@{/wristbands}">Wristbands</a></h6>
         <h6 th:if="${isManager}"><a th:href="@{/wristbands/modify}">::Assign</a></h6>
         <h6 th:if="${isAdmin || isManager}"><a th:href="@{/alerts}">Alerts</a></h6>
-        <h6 th:if="${isAdmin || isManager}"><a th:href="@{/alerts/modify}">::Modify</a></h6>
         <h6 th:if="${isEnabled && !isManager}"><a th:href="@{/profiles}">Profile</a></h6>
         <h6 th:if="${isEnabled}"><a th:href="@{/logout}">Logout</a></h6>
         <h6 th:if="${isLoggedOut}"><a th:href="@{/login}">Login</a></h6>

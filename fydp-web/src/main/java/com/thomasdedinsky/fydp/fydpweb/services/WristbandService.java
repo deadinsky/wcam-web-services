@@ -77,4 +77,12 @@ public class WristbandService {
         return wristbandsWithLocation
                 .stream().sorted(Comparator.comparingLong(WristbandLocation::getWristbandId)).collect(Collectors.toList());
     }
+
+    public WristbandLocation getDetailedWristband(Wristband wristband) {
+        WristbandLocation detailedWristband = wristbandLocationRepository.findFirstByWristbandOrderByTimeStampDesc(wristband);
+        if (detailedWristband != null) {
+            return detailedWristband;
+        }
+        return new WristbandLocation(wristband);
+    }
 }

@@ -10,7 +10,7 @@
     <tr>
         <th>MAC Address</th>
         <th>Name</th>
-        <th>User ID</th>
+        <th>User</th>
         <th>X</th>
         <th>Y</th>
         <th>Z</th>
@@ -18,9 +18,17 @@
         <th>Timestamp</th>
     </tr>
     <tr th:each="detailedWristband:${detailedWristbands}">
-        <td th:text="${detailedWristband.wristband.macAddress}">macAddress</td>
+        <td>
+            <a th:text="${detailedWristband.wristband.macAddress}"
+               th:href="@{/wristbands/{id}(id=${detailedWristband.wristband.id})}">macAddress</a>
+        </td>
         <td th:text="${detailedWristband.wristband.nickname}">nickname</td>
-        <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
+        <td>
+            <a th:text="${detailedWristband.wristband?.user.lastName != null ?
+                detailedWristband.wristband?.user.firstName + ' ' + detailedWristband.wristband?.user.lastName :
+                detailedWristband.wristband?.user.firstName}"
+               th:href="@{/profiles/{id}(id=${detailedWristband.wristband?.user.id})}">fullName</a>
+        </td>
         <td th:text="${detailedWristband.locationX}">locationX</td>
         <td th:text="${detailedWristband.locationY}">locationY</td>
         <td th:text="${detailedWristband.locationZ}">locationZ</td>

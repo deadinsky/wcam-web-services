@@ -21,6 +21,10 @@
     </tr>
     <tr th:each="user:${users}">
         <td th:text="${user.id}">id</td>
+        <td>
+            <a th:text="${user.id}"
+               th:href="@{/profiles/{id}(id=${user.id})}">id</a>
+        </td>
         <td th:text="${user.firstName}">firstName</td>
         <td th:text="${user.lastName}">lastName</td>
         <td th:text="${user.birthDate}">birthDate</td>

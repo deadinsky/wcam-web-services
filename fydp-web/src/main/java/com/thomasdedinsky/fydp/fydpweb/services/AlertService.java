@@ -25,7 +25,7 @@ public class AlertService {
     }
 
     public List<Alert> getAllAlerts() {
-        return alertRepository.findAll();
+        return alertRepository.findByIsActive(true);
     }
 
     public void modifyAlert(Alert alert) {
@@ -36,14 +36,14 @@ public class AlertService {
     }
 
     public void refreshAlert(String message) {
-        Optional<Alert> alert = alertRepository.findById(message);
-        if (alert.isPresent() && alert.get().isSevere()) {
-            applicationEventPublisher.publishEvent(new AlertEvent(this, alert.get()));
+        Alert alert = alertRepository.findFirstByMessageOrderByTimeStampDesc(message);
+        if (alert != null && alert.isSevere()) {
+            applicationEventPublisher.publishEvent(new AlertEvent(this, alert));
         }
     }
 
     @EventListener(ContextRefreshedEvent.class)
     public void initializeAlerts() {
-        Utilities.initializeAlerts(alertRepository.findAll());
+        Utilities.initializeAlerts(alertRepository.findByIsActive(true));
     }
 }

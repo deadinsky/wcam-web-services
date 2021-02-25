@@ -10,13 +10,20 @@ import java.sql.Timestamp;
 public class Alert {
     @Id
     @Column(name="ID")
-    private String id;
+    private long id;
+    @OneToOne
+    @JoinColumn(name="WRISTBAND_ID", referencedColumnName="ID")
+    private Wristband wristband;
+    @Column(name="MESSAGE")
+    private String message;
     @Column(name="IS_SEVERE")
     private boolean isSevere;
     private String isSevereString;
     @Column(name="IS_ACTIVE")
     private boolean isActive;
     private String isActiveString;
+    @Column(name="CONTACT_STATUS")
+    private String contactStatus;
     @Column(name="TIME_STAMP")
     private Timestamp timeStamp;
 
@@ -24,20 +31,39 @@ public class Alert {
         super();
     }
 
-    public Alert(String id, boolean isSevere, boolean isActive, Timestamp timeStamp) {
+    public Alert(long id, Wristband wristband, String message, boolean isSevere, boolean isActive, String contactStatus, Timestamp timeStamp) {
         super();
         this.id = id;
+        this.wristband = wristband;
+        this.message = message;
         this.isSevere = isSevere;
         this.isActive = isActive;
+        this.contactStatus = contactStatus;
         this.timeStamp = timeStamp;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public Wristband getWristband() {
+        return wristband;
+    }
+
+    public void setWristband(Wristband wristband) {
+        this.wristband = wristband;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public boolean isSevere() {
@@ -64,6 +90,14 @@ public class Alert {
     public void setIsActiveString(String isActiveString) {
         this.isActiveString = isActiveString;
         this.isActive = "on".equals(isActiveString);
+    }
+
+    public String getContactStatus() {
+        return contactStatus;
+    }
+
+    public void setContactStatus(String contactStatus) {
+        this.contactStatus = contactStatus;
     }
 
     public Timestamp getTimeStamp() {

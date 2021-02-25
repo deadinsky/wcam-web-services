@@ -38,22 +38,24 @@ public class AlertController {
         return "alerts";
     }
 
-    @GetMapping("/modify")
-    public String modifyAlert(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    @GetMapping("/modify/{alert}")
+    public String modifyAlert(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Alert alert) {
         if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) &&
                 !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/";
         }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
+        model.addAttribute("alert", alert);
         return "alerts-modify";
     }
 
-    @PostMapping("/modify")
-    public String modifyAlert(Alert alert, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    @GetMapping("/resolve/{alert}")
+    public String resolveAlert(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Alert alert) {
         if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) &&
                 !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/";
         }
+        alert.setActive(false);
         alert.setTimeStamp(new Timestamp(System.currentTimeMillis()));
         alertService.modifyAlert(alert);
         return "redirect:/alerts";

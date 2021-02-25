@@ -45,7 +45,10 @@
         <th>Timestamp</th>
     </tr>
     <tr th:each="detailedWristband:${detailedWristbands}">
-        <td th:text="${detailedWristband.wristband.macAddress}">macAddress</td>
+        <td>
+            <a th:text="${detailedWristband.wristband.macAddress}"
+               th:href="@{/wristbands/{id}(id=${detailedWristband.wristband.id})}">macAddress</a>
+        </td>
         <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
         <td th:text="${detailedWristband.locationX}">locationX</td>
         <td th:text="${detailedWristband.locationY}">locationY</td>

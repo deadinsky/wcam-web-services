@@ -8,15 +8,27 @@
 <header th:replace="../fragments/general.html :: header"></header>
 <table>
     <tr>
+        <th>ID</th>
+        <th>Wristband MAC</th>
         <th>Message</th>
         <th>Is Severe?</th>
         <th>Is Active?</th>
+        <th>Contact Status</th>
         <th>Timestamp</th>
     </tr>
     <tr th:each="alert:${alerts}">
-        <td th:text="${alert.id}">id</td>
+        <td>
+            <a th:text="${alert.id}"
+               th:href="@{/alerts/modify/{id}(id=${alert.id})}">id</a>
+        </td>
+        <td>
+            <a th:text="${alert.wristband.macAddress}"
+               th:href="@{/wristbands/{id}(id=${alert.wristband.id})}">macAddress</a>
+        </td>
+        <td th:text="${alert.message}">message</td>
         <td th:text="${alert.isSevere}">isSevere</td>
         <td th:text="${alert.isActive}">isActive</td>
+        <td th:text="${alert.contactStatus}">contactStatus</td>
         <td th:text="${alert.timeStamp}">timeStamp</td>
     </tr>
 </table>

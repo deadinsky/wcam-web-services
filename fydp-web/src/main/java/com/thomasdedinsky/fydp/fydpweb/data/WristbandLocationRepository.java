@@ -26,4 +26,5 @@ public interface WristbandLocationRepository extends JpaRepository<WristbandLoca
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(w.id), w.wristband) " +
             "FROM WristbandLocation w WHERE w.wristband.user = :user GROUP BY w.wristband")
     List<DetailedIntermediate> findAllDetailedWristbandsByUserIntermediate(@Param("user") User user);
+    WristbandLocation findFirstByWristbandOrderByTimeStampDesc(Wristband wristband);
 }

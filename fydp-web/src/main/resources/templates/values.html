@@ -16,10 +16,13 @@
     </tr>
     <tr th:each="value:${values}">
         <td th:text="${value.id}">id</td>
-        <td th:text="${value.wristband.macAddress}">macAddress</td>
-        <td th:text="${value.timeStamp}">timeStamp</td>
+        <td>
+            <a th:text="${value.wristband.macAddress}"
+               th:href="@{/wristbands/{id}(id=${value.wristband.id})}">macAddress</a>
+        </td>
         <td th:text="${value.value}">value</td>
         <td th:text="${value.confidence}">confidence</td>
+        <td th:text="${value.timeStamp}">timeStamp</td>
     </tr>
 </table>
 <footer th:replace="../fragments/general.html :: footer"></footer>

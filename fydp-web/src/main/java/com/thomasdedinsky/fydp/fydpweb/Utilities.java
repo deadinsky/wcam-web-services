@@ -103,7 +103,7 @@ public class Utilities {
         activeSevereAlertsText = new ArrayList<>();
         for (Alert a : alerts) {
             if (a.isActive() && a.isSevere()) {
-                activeSevereAlertsText.add(a.getId());
+                activeSevereAlertsText.add(a.getMessage());
             }
         }
         alertText = String.join(" | ", activeSevereAlertsText);
@@ -115,9 +115,9 @@ public class Utilities {
             return false;
         }
         if (alert.isActive()) {
-            activeSevereAlertsText.add(alert.getId());
+            activeSevereAlertsText.add(alert.getMessage());
         } else {
-            activeSevereAlertsText.remove(alert.getId());
+            activeSevereAlertsText.remove(alert.getMessage());
         }
         alertText = String.join(" | ", activeSevereAlertsText);
         existsActiveSevereAlert = activeSevereAlertsText.size() > 0;
