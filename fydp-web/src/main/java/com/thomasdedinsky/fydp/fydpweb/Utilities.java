@@ -2,6 +2,10 @@ package com.thomasdedinsky.fydp.fydpweb;
 
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
 import com.thomasdedinsky.fydp.fydpweb.models.Alert;
+import com.thomasdedinsky.fydp.fydpweb.models.Phone;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
@@ -11,6 +15,8 @@ public class Utilities {
     public static List<String> activeSevereAlertsText = new ArrayList<>();
     public static boolean existsActiveSevereAlert = false;
     public static String alertText = "";
+    public static List<PhoneNumber> phoneNumbers = new ArrayList<>();
+    public static PhoneNumber fromNumber = new PhoneNumber(System.getenv("PHONE_NUMBER"));
 
     public static String longToMacAddress(long id) {
         String macAddressRaw = Long.toHexString(id);
@@ -110,12 +116,26 @@ public class Utilities {
         existsActiveSevereAlert = activeSevereAlertsText.size() > 0;
     }
 
+    public static void initializePhones(List<Phone> phones) {
+        for (Phone phone : phones) {
+            phoneNumbers.add(new PhoneNumber(phone.getId()));
+        }
+        Twilio.init(System.getenv("ACCOUNT_SID"), System.getenv("AUTH_TOKEN"));
+    }
+
+    public static void sendAlertMessages(Alert alert) {
+        for (PhoneNumber number : phoneNumbers) {
+            Message.creator(number, fromNumber, alert.getMessage()).create();
+        }
+    }
+
     public static boolean refreshAlert(Alert alert) {
         if (!alert.isSevere() || (alert.isActive() == activeSevereAlertsText.contains(alert.getId()))) {
             return false;
         }
         if (alert.isActive()) {
             activeSevereAlertsText.add(alert.getMessage());
+            sendAlertMessages(alert);
         } else {
             activeSevereAlertsText.remove(alert.getMessage());
         }

@@ -2,6 +2,7 @@ package com.thomasdedinsky.fydp.fydpweb.services;
 
 import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.data.AlertRepository;
+import com.thomasdedinsky.fydp.fydpweb.data.PhoneRepository;
 import com.thomasdedinsky.fydp.fydpweb.models.Alert;
 import com.thomasdedinsky.fydp.fydpweb.models.AlertEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,12 @@ public class AlertService {
     @Autowired
     private final ApplicationEventPublisher applicationEventPublisher;
     private final AlertRepository alertRepository;
+    private final PhoneRepository phoneRepository;
 
-    public AlertService(ApplicationEventPublisher applicationEventPublisher, AlertRepository alertRepository) {
+    public AlertService(ApplicationEventPublisher applicationEventPublisher, AlertRepository alertRepository, PhoneRepository phoneRepository) {
         this.applicationEventPublisher = applicationEventPublisher;
         this.alertRepository = alertRepository;
+        this.phoneRepository = phoneRepository;
     }
 
     public List<Alert> getAllAlerts() {
@@ -45,5 +48,6 @@ public class AlertService {
     @EventListener(ContextRefreshedEvent.class)
     public void initializeAlerts() {
         Utilities.initializeAlerts(alertRepository.findByIsActive(true));
+        Utilities.initializePhones(phoneRepository.findAll());
     }
 }
