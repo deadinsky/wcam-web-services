@@ -5,6 +5,7 @@ import com.thomasdedinsky.fydp.fydpweb.data.AlertRepository;
 import com.thomasdedinsky.fydp.fydpweb.data.PhoneRepository;
 import com.thomasdedinsky.fydp.fydpweb.models.Alert;
 import com.thomasdedinsky.fydp.fydpweb.models.AlertEvent;
+import com.thomasdedinsky.fydp.fydpweb.models.Phone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -43,6 +44,20 @@ public class AlertService {
         if (alert != null && alert.isSevere()) {
             applicationEventPublisher.publishEvent(new AlertEvent(this, alert));
         }
+    }
+
+    public List<Phone> getAllPhones() {
+        return phoneRepository.findAll();
+    }
+
+    public void addPhone(Phone phone) {
+        phoneRepository.save(phone);
+        Utilities.addPhone(phone);
+    }
+
+    public void removePhone(Phone phone) {
+        phoneRepository.delete(phone);
+        Utilities.removePhone(phone);
     }
 
     @EventListener(ContextRefreshedEvent.class)

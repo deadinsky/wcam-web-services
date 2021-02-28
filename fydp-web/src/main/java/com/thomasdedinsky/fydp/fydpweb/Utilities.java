@@ -15,7 +15,7 @@ public class Utilities {
     public static List<String> activeSevereAlertsText = new ArrayList<>();
     public static boolean existsActiveSevereAlert = false;
     public static String alertText = "";
-    public static List<PhoneNumber> phoneNumbers = new ArrayList<>();
+    public static List<String> phoneNumbers = new ArrayList<>();
     public static PhoneNumber fromNumber = new PhoneNumber(System.getenv("PHONE_NUMBER"));
 
     public static String longToMacAddress(long id) {
@@ -118,14 +118,24 @@ public class Utilities {
 
     public static void initializePhones(List<Phone> phones) {
         for (Phone phone : phones) {
-            phoneNumbers.add(new PhoneNumber(phone.getId()));
+            phoneNumbers.add(phone.getId());
         }
         Twilio.init(System.getenv("ACCOUNT_SID"), System.getenv("AUTH_TOKEN"));
     }
 
+    public static void addPhone(Phone phone) {
+        if (!phoneNumbers.contains(phone.getId())) {
+            phoneNumbers.add(phone.getId());
+        }
+    }
+
+    public static void removePhone(Phone phone) {
+        phoneNumbers.remove(phone.getId());
+    }
+
     public static void sendAlertMessages(Alert alert) {
-        for (PhoneNumber number : phoneNumbers) {
-            Message.creator(number, fromNumber, alert.getMessage()).create();
+        for (String number : phoneNumbers) {
+            Message.creator(new PhoneNumber(number), fromNumber, alert.getMessage()).create();
         }
     }
 

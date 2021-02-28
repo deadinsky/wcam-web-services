@@ -3,6 +3,7 @@ package com.thomasdedinsky.fydp.fydpweb.controllers;
 import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Alert;
+import com.thomasdedinsky.fydp.fydpweb.models.Phone;
 import com.thomasdedinsky.fydp.fydpweb.services.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
@@ -65,5 +66,33 @@ public class AlertController {
     public String refreshAlert(Model model, @PathVariable String message) {
         alertService.refreshAlert(message);
         return "blank";
+    }
+
+    @GetMapping("/phones")
+    public String showPhones(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
+            return "redirect:/";
+        }
+        Utilities.addModelAttributes(model, userPrincipal.getUser());
+        model.addAttribute("phones", alertService.getAllPhones());
+        return "phones";
+    }
+
+    @PostMapping("/phones")
+    public String addPhone(Phone phone, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
+            return "redirect:/";
+        }
+        alertService.addPhone(phone);
+        return "redirect:/alerts/phones";
+    }
+
+    @GetMapping("/phones/remove/{phone}")
+    public String removePhone(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Phone phone) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
+            return "redirect:/";
+        }
+        alertService.removePhone(phone);
+        return "redirect:/alerts/phones";
     }
 }

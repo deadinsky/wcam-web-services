@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Phones</title>
+</head>
+<body>
+<header th:replace="../fragments/general.html :: header"></header>
+<table>
+    <tr>
+        <th>Phone</th>
+        <th>Remove?</th>
+    </tr>
+    <tr th:each="phone:${phones}">
+        <td th:text="${phone.id}">phone</td>
+        <td>
+            <a th:text="${'remove'}"
+               th:href="@{/alerts/phones/remove/{id}(id=${phone.id})}">phone</a>
+        </td>
+    </tr>
+</table>
+<form th:action="@{/alerts/phones}" method="post">
+    <div>
+        <label>Phone: <input type="text" name="id" pattern="\+[0-9]{11,14}"/></label>
+    </div>
+    <div>
+        <input type="submit" value="Add"/>
+    </div>
+</form>
+<footer th:replace="../fragments/general.html :: footer"></footer>
+</body>
+</html>
