@@ -8,56 +8,64 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Birth Date</th>
-        <th>Email</th>
-        <th>Locked?</th>
-        <th>Enabled?</th>
-        <th>Manager?</th>
-        <th>Admin?</th>
-        <th>Notes</th>
-    </tr>
-    <tr>
-        <td th:text="${user.id}">id</td>
-        <td th:text="${user.firstName}">firstName</td>
-        <td th:text="${user.lastName}">lastName</td>
-        <td th:text="${user.birthDate}">birthDate</td>
-        <td th:text="${user.email}">email</td>
-        <td th:text="${user.isLocked}">isLocked</td>
-        <td th:text="${user.isEnabled}">isEnabled</td>
-        <td th:text="${user.isManager}">isManager</td>
-        <td th:text="${user.isAdmin}">isAdmin</td>
-        <td th:text="${user.notes}">notes</td>
-    </tr>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Email</th>
+            <th scope="col">Locked?</th>
+            <th scope="col">Enabled?</th>
+            <th scope="col">Manager?</th>
+            <th scope="col">Admin?</th>
+            <th scope="col">Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="col" th:text="${user.id}">id</td>
+            <td th:text="${user.firstName}">firstName</td>
+            <td th:text="${user.lastName}">lastName</td>
+            <td th:text="${user.birthDate}">birthDate</td>
+            <td th:text="${user.email}">email</td>
+            <td th:text="${user.isLocked}">isLocked</td>
+            <td th:text="${user.isEnabled}">isEnabled</td>
+            <td th:text="${user.isManager}">isManager</td>
+            <td th:text="${user.isAdmin}">isAdmin</td>
+            <td th:text="${user.notes}">notes</td>
+        </tr>
+    </tbody>
 </table>
 <br/>
 <p>Wristbands:</p>
-<table>
-    <tr>
-        <th>MAC Address</th>
-        <th>User ID</th>
-        <th>X</th>
-        <th>Y</th>
-        <th>Z</th>
-        <th>Approx. Distance (m)</th>
-        <th>Timestamp</th>
-    </tr>
-    <tr th:each="detailedWristband:${detailedWristbands}">
-        <td>
-            <a th:text="${detailedWristband.wristband.macAddress}"
-               th:href="@{/wristbands/{id}(id=${detailedWristband.wristband.id})}">macAddress</a>
-        </td>
-        <td th:text="${detailedWristband.wristband?.user.id}">userId</td>
-        <td th:text="${detailedWristband.locationX}">locationX</td>
-        <td th:text="${detailedWristband.locationY}">locationY</td>
-        <td th:text="${detailedWristband.locationZ}">locationZ</td>
-        <td th:text="${detailedWristband.approximateDistanceInMetres}">distance</td>
-        <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
-    </tr>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">MAC Address</th>
+            <th scope="col">Nickname</th>
+            <th scope="col">X</th>
+            <th scope="col">Y</th>
+            <th scope="col">Z</th>
+            <th scope="col">Approx. Distance (m)</th>
+            <th scope="col">Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="detailedWristband:${detailedWristbands}">
+            <td scope="row">
+                <a th:text="${detailedWristband.wristband.macAddress}"
+                   th:href="@{/wristbands/{id}(id=${detailedWristband.wristband.id})}">macAddress</a>
+            </td>
+            <td th:text="${detailedWristband.wristband.nickname}">nickname</td>
+            <td th:text="${detailedWristband.locationX}">locationX</td>
+            <td th:text="${detailedWristband.locationY}">locationY</td>
+            <td th:text="${detailedWristband.locationZ}">locationZ</td>
+            <td th:text="${detailedWristband.approximateDistanceInMetres}">distance</td>
+            <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
+        </tr>
+    </tbody>
 </table>
 <footer th:replace="../fragments/general.html :: footer"></footer>
 </body>

@@ -40,34 +40,38 @@
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
-<table>
-    <tr>
-        <th>MAC Address</th>
-        <th>X</th>
-        <th>Y</th>
-        <th>Z</th>
-        <th>Timestamp</th>
-    </tr>
-    <tr th:each="location:${hubLocations}">
-        <td>
-            <a th:text="${location.hub.macAddress}"
-               th:href="@{/hubs/modify/{id}(id=${location.hub.id})}">macAddress</a>
-        </td>
-        <td th:text="${location.locationX}">locationX</td>
-        <td th:text="${location.locationY}">locationY</td>
-        <td th:text="${location.locationZ}">locationZ</td>
-        <td th:text="${location.timeStamp}">timeStamp</td>
-    </tr>
-    <tr th:each="location:${wristbandLocations}">
-        <td>
-            <a th:text="${location.wristband.macAddress}"
-               th:href="@{/wristbands/{id}(id=${location.wristband.id})}">macAddress</a>
-        </td>
-        <td th:text="${location.locationX}">locationX</td>
-        <td th:text="${location.locationY}">locationY</td>
-        <td th:text="${location.locationZ}">locationZ</td>
-        <td th:text="${location.timeStamp}">timeStamp</td>
-    </tr>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">MAC Address</th>
+            <th scope="col">X</th>
+            <th scope="col">Y</th>
+            <th scope="col">Z</th>
+            <th scope="col">Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="location:${hubLocations}">
+            <td scope="row">
+                <a th:text="${location.hub.macAddress}"
+                   th:href="@{/hubs/modify/{id}(id=${location.hub.id})}">macAddress</a>
+            </td>
+            <td th:text="${location.locationX}">locationX</td>
+            <td th:text="${location.locationY}">locationY</td>
+            <td th:text="${location.locationZ}">locationZ</td>
+            <td th:text="${location.timeStamp}">timeStamp</td>
+        </tr>
+        <tr th:each="location:${wristbandLocations}">
+            <td scope="row">
+                <a th:text="${location.wristband.macAddress}"
+                   th:href="@{/wristbands/{id}(id=${location.wristband.id})}">macAddress</a>
+            </td>
+            <td th:text="${location.locationX}">locationX</td>
+            <td th:text="${location.locationY}">locationY</td>
+            <td th:text="${location.locationZ}">locationZ</td>
+            <td th:text="${location.timeStamp}">timeStamp</td>
+        </tr>
+    </tbody>
 </table>
 <footer th:replace="../fragments/general.html :: footer"></footer>
 </body>

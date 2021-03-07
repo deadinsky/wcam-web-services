@@ -40,24 +40,28 @@
         </div>
     </div>
 </form>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Wristband MAC</th>
-        <th>Timestamp</th>
-        <th>Value</th>
-        <th>Confidence</th>
-    </tr>
-    <tr th:each="value:${values}">
-        <td th:text="${value.id}">id</td>
-        <td>
-            <a th:text="${value.wristband.macAddress}"
-               th:href="@{/wristbands/{id}(id=${value.wristband.id})}">macAddress</a>
-        </td>
-        <td th:text="${value.value}">value</td>
-        <td th:text="${value.confidence}">confidence</td>
-        <td th:text="${value.timeStamp}">timeStamp</td>
-    </tr>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Wristband MAC</th>
+            <th scope="col">Value</th>
+            <th scope="col">Confidence</th>
+            <th scope="col">Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="value:${values}">
+            <td scope="row" th:text="${value.id}">id</td>
+            <td>
+                <a th:text="${value.wristband.macAddress}"
+                   th:href="@{/wristbands/{id}(id=${value.wristband.id})}">macAddress</a>
+            </td>
+            <td th:text="${value.value}">value</td>
+            <td th:text="${value.confidence}">confidence</td>
+            <td th:text="${value.timeStamp}">timeStamp</td>
+        </tr>
+    </tbody>
 </table>
 <footer th:replace="../fragments/general.html :: footer"></footer>
 </body>

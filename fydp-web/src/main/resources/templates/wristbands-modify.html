@@ -8,27 +8,34 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">MAC Address</th>
+        <th scope="col">Nickname</th>
+        <th scope="col">X</th>
+        <th scope="col">Y</th>
+        <th scope="col">Z</th>
+        <th scope="col">Distance (m)</th>
+        <th scope="col">Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="detailedWristband:${detailedWristbands}">
+        <td scope="row">
+            <a th:text="${detailedWristband.wristband.macAddress}"
+               th:href="@{/wristbands/{id}(id=${detailedWristband.wristband.id})}">macAddress</a>
+        </td>
+        <td th:text="${detailedWristband.wristband.nickname}">nickname</td>
+        <td th:text="${detailedWristband.locationX}">locationX</td>
+        <td th:text="${detailedWristband.locationY}">locationY</td>
+        <td th:text="${detailedWristband.locationZ}">locationZ</td>
+        <td th:text="${detailedWristband.approximateDistanceInMetres}">distance</td>
+        <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
+    </tr>
+    </tbody>
+</table>
 <form th:action="@{/wristbands/modify}" method="post">
-    <table>
-        <tr>
-            <th>MAC Address</th>
-            <th>Nickname</th>\
-            <th>X</th>
-            <th>Y</th>
-            <th>Z</th>
-            <th>Approx. Distance (m)</th>
-            <th>Timestamp</th>
-        </tr>
-        <tr th:each="detailedWristband:${detailedWristbands}">
-            <td th:text="${detailedWristband.wristband.macAddress}">macAddress</td>
-            <td th:text="${detailedWristband.wristband.nickname}">nickname</td>
-            <td th:text="${detailedWristband.locationX}">locationX</td>
-            <td th:text="${detailedWristband.locationY}">locationY</td>
-            <td th:text="${detailedWristband.locationZ}">locationZ</td>
-            <td th:text="${detailedWristband.approximateDistanceInMetres}">distance</td>
-            <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
-        </tr>
-    </table>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">MAC:</label>
         <div class="col-sm-10">

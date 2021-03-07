@@ -9,36 +9,39 @@
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Wristband MAC</th>
-        <th>Message</th>
-        <th>Is Severe?</th>
-        <th>Is Active?</th>
-        <th>Contact Status</th>
-        <th>Timestamp</th>
-    </tr>
-    <tr>
-        <td>
-            <a th:text="${alert.id}"
-               th:href="@{/alerts/modify/{id}(id=${alert.id})}">id</a>
-        </td>
-        <td>
-            <a th:text="${alert.wristband.macAddress}"
-               th:href="@{/wristbands/{id}(id=${alert.wristband.id})}">macAddress</a>
-        </td>
-        <td th:text="${alert.message}">message</td>
-        <td th:text="${alert.isSevere}">isSevere</td>
-        <td th:text="${alert.isActive}">isActive</td>
-        <td th:text="${alert.contactStatus}">contactStatus</td>
-        <td th:text="${alert.timeStamp}">timeStamp</td>
-    </tr>
-    <h6>
-        <a th:text="${'Resolve Alert'}"
-           th:href="@{/alerts/resolve/{id}(id=${alert.id})}">resolve</a>
-    </h6>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Wristband MAC</th>
+            <th scope="col">Message</th>
+            <th scope="col">Is Severe?</th>
+            <th scope="col">Is Active?</th>
+            <th scope="col">Contact Status</th>
+            <th scope="col">Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a th:text="${alert.id}"
+                   th:href="@{/alerts/modify/{id}(id=${alert.id})}">id</a>
+            </td>
+            <td>
+                <a th:text="${alert.wristband.macAddress}"
+                   th:href="@{/wristbands/{id}(id=${alert.wristband.id})}">macAddress</a>
+            </td>
+            <td th:text="${alert.message}">message</td>
+            <td th:text="${alert.isSevere}">isSevere</td>
+            <td th:text="${alert.isActive}">isActive</td>
+            <td th:text="${alert.contactStatus}">contactStatus</td>
+            <td th:text="${alert.timeStamp}">timeStamp</td>
+        </tr>
+    </tbody>
 </table>
+<button class="btn btn-primary">
+    <a th:href="@{/alerts/resolve/{id}(id=${alert.id})}">Resolve Alert</a>
+</button>
 <footer th:replace="../fragments/general.html :: footer"></footer>
 </body>
 </html>

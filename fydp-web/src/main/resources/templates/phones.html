@@ -8,18 +8,21 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
-<table>
-    <tr>
-        <th>Phone</th>
-        <th>Remove?</th>
-    </tr>
-    <tr th:each="phone:${phones}">
-        <td th:text="${phone.id}">phone</td>
-        <td>
-            <a th:text="${'remove'}"
-               th:href="@{/alerts/phones/remove/{id}(id=${phone.id})}">phone</a>
-        </td>
-    </tr>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Phone</th>
+            <th scope="col">Remove?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="phone:${phones}">
+            <td th:text="${phone.id}">phone</td>
+            <td>
+                <a th:href="@{/alerts/phones/remove/{id}(id=${phone.id})}">remove</a>
+            </td>
+        </tr>
+    </tbody>
 </table>
 <form th:action="@{/alerts/phones}" method="post">
     <div class="form-group row">
