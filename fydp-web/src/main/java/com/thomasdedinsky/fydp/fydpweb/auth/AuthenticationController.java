@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -20,7 +21,7 @@ public class AuthenticationController {
         this.confirmationTokenService = confirmationTokenService;
     }
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String getIndex(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
         if (userPrincipal != null) {
             Utilities.addModelAttributes(model, userPrincipal.getUser());
@@ -29,18 +30,12 @@ public class AuthenticationController {
     }
 
     @GetMapping("/login")
-    public String getLogin(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        if (userPrincipal != null) {
-            Utilities.addModelAttributes(model, userPrincipal.getUser());
-        }
+    public String getLogin() {
         return "login";
     }
 
     @GetMapping("/signup")
-    public String signUp(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        if (userPrincipal != null) {
-            Utilities.addModelAttributes(model, userPrincipal.getUser());
-        }
+    public String signUp() {
         return "signup";
     }
 

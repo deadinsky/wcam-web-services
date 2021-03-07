@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles">
     <meta charset="UTF-8" />
-    <link th:fragment="stylesheet" th:rel="stylesheet"  th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link th:fragment="stylesheet" th:rel="stylesheet"  th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
 <header th:fragment="header">
@@ -24,6 +24,58 @@
         <h6><a th:href="@{/signup}">Signup</a></h6>
     </div>
 </header>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/}">WCAM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul th:if="${isEnabled}" class="navbar-nav mr-auto">
+            <li th:if="${isAdmin}" class="nav-item">
+                <a class="nav-link" th:href="@{/hubs}">Hubs</a>
+            </li>
+            <li th:if="${isAdmin}" class="nav-item">
+                <a class="nav-link" th:href="@{/locations}">Locations</a>
+            </li>
+            <li th:if="${isEnabled}" class="nav-item">
+                <a class="nav-link" th:href="@{/values}">Values</a>
+            </li>
+            <li th:if="${isEnabled}" class="nav-item">
+                <a class="nav-link" th:href="@{/wristbands}">Wristbands</a>
+            </li>
+            <li th:if="${isManager}" class="nav-item">
+                <a class="nav-link" th:href="@{/wristbands/modify}">::Assign</a>
+            </li>
+            <li th:if="${isAdmin || isManager}" class="nav-item">
+                <a class="nav-link" th:href="@{/alerts}">Alerts</a>
+            </li>
+            <li th:if="${isAdmin}" class="nav-item">
+                <a class="nav-link" th:href="@{/alerts/phones}">::Phones</a>
+            </li>
+            <li th:if="${isEnabled && !isManager}" class="nav-item">
+                <a class="nav-link" th:href="@{/profiles}">Profile</a>
+            </li>
+            <li th:if="${isEnabled}" class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+            <li th:if="${isLoggedOut}" class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li th:if="${isLoggedOut}" class="nav-item">
+                <a class="nav-link" th:href="@{/signup}">Signup</a>
+            </li>
+        </ul>
+        <ul th:unless="${isEnabled}" class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/signup}">Signup</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <footer th:fragment="footer">
     <h6 th:if="${existsActiveSevereAlert}" th:text="${alertText}">alertText</h6>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>

@@ -6,7 +6,7 @@
     <link th:replace="../fragments/general.html :: stylesheet"/>
 </head>
 <body>
-<header th:replace="../fragments/general.html :: header"></header>
+<nav th:replace="../fragments/general.html :: navbar"></nav>
 <form th:action="@{/login}" method="post">
     <div>
         <label>Username: <input type="text" name="username" required/></label>
@@ -16,5 +16,6 @@
         <input type="submit" value="Login"/>
     </div>
 </form>
+<footer th:replace="../fragments/general.html :: footer"></footer>
 </body>
 </html>

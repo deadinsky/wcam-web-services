@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="fydp-project" target="8" />
+      <module name="fydp-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

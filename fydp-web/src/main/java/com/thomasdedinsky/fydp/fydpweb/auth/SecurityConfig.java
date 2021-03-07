@@ -33,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/", "/index", "/css/*", "/js/*",
-                    "*/webjars/bootstrap/*", "*/webjars/jquery/*", "*/webjars/popper.js/*",
+                .authorizeRequests().antMatchers("/", "/index",
+                    "/webjars/**",
                     "/alerts/refresh/*", "/signup", "/confirm").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -44,7 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .and()
                 .logout().invalidateHttpSession(true)
-                .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").permitAll();
     }

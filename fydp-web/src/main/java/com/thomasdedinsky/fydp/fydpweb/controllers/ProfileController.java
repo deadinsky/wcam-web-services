@@ -35,7 +35,7 @@ public class ProfileController {
 
     @RequestMapping("/{user}")
     public String getProfileByUser(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable User user) {
-        if (!userPrincipal.getUser().equals(user) && !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
+        if (!(userPrincipal.getUser().getId() == user.getId()) && !userPrincipal.getAuthorities().contains(userPrincipal.authorityManager)) {
             return "redirect:/profiles/" + userPrincipal.getUser().getId();
         }
         if (user == null) {

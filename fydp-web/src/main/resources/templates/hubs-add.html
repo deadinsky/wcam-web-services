@@ -6,7 +6,7 @@
     <link th:replace="../fragments/general.html :: stylesheet"/>
 </head>
 <body>
-<header th:replace="../fragments/general.html :: header"></header>
+<nav th:replace="../fragments/general.html :: navbar"></nav>
 <form th:action="@{/hubs/add}" method="post">
     <div>
         <label>MAC: <input type="text" name="macAddress" pattern="([0-9A-F]{2}:){5}[0-9A-F]{2}"/></label>
