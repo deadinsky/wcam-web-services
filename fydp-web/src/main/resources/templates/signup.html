@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
+    <link th:replace="../fragments/general.html :: stylesheet"/>
 </head>
 <body>
-<header><div><h6><a th:href="@{/login}">Login</a></h6></div></header>
+<header th:replace="../fragments/general.html :: header"></header>
 <form th:action="@{/signup}" method="post">
     <div>
         <label>First Name: <input type="text" name="firstName" required/></label>

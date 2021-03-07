@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles">
     <meta charset="UTF-8" />
+    <link th:fragment="stylesheet" th:rel="stylesheet"  th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
 <header th:fragment="header">
-    <div>
+    <div th:if="${isEnabled}">
         <h6 th:if="${isAdmin}"><a th:href="@{/hubs}">Hubs</a></h6>
         <h6 th:if="${isAdmin}"><a th:href="@{/locations}">Locations</a></h6>
         <h6 th:if="${isEnabled}"><a th:href="@{/values}">Values</a></h6>
@@ -18,9 +19,16 @@
         <h6 th:if="${isLoggedOut}"><a th:href="@{/login}">Login</a></h6>
         <h6 th:if="${isLoggedOut}"><a th:href="@{/signup}">Signup</a></h6>
     </div>
+    <div th:unless="${isEnabled}">
+        <h6><a th:href="@{/login}">Login</a></h6>
+        <h6><a th:href="@{/signup}">Signup</a></h6>
+    </div>
 </header>
-<footer th:fragment="footer" th:if="${existsActiveSevereAlert}">
-    <h6 th:text="${alertText}">alertText</h6>
+<footer th:fragment="footer">
+    <h6 th:if="${existsActiveSevereAlert}" th:text="${alertText}">alertText</h6>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </footer>
 </body>
 </html>

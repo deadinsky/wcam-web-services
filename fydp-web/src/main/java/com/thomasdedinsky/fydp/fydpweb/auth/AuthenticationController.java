@@ -1,7 +1,10 @@
 package com.thomasdedinsky.fydp.fydpweb.auth;
 
+import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,13 +20,27 @@ public class AuthenticationController {
         this.confirmationTokenService = confirmationTokenService;
     }
 
+    @GetMapping("/")
+    public String getIndex(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (userPrincipal != null) {
+            Utilities.addModelAttributes(model, userPrincipal.getUser());
+        }
+        return "index";
+    }
+
     @GetMapping("/login")
-    public String getLogin() {
+    public String getLogin(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (userPrincipal != null) {
+            Utilities.addModelAttributes(model, userPrincipal.getUser());
+        }
         return "login";
     }
 
     @GetMapping("/signup")
-    public String signUp() {
+    public String signUp(Model model, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        if (userPrincipal != null) {
+            Utilities.addModelAttributes(model, userPrincipal.getUser());
+        }
         return "signup";
     }
 
