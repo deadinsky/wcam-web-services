@@ -9,15 +9,36 @@
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
 <form th:action="@{/locations}" method="get">
-    <label>Type: <select name="type">
-        <option value="hub">Hub</option>
-        <option value="wristband">Wristband</option>
-    </select></label>
-    <label>Page Num: <input type="number" step="1" name="pageNum"/></label>
-    <label>Page Size: <input type="number" step="1" name="pageSize"/></label>
-    <label>Wristband ID: <input type="number" step="1" name="wristband"/></label>
-    <label>Hub ID: <input type="number" step="1" name="hub"/></label>
-    <input type="submit" value="Search"/>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Type:</label>
+        <div class="col-sm-10">
+            <select class="form-control" name="type">
+                <option value="hub">Hub</option>
+                <option value="wristband">Wristband</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Page Num:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" step="1" name="pageNum"/>
+        </div>
+        <label class="col-sm-2 col-form-label">Page Size:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" step="1" name="pageSize"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Wristband ID:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" step="1" name="wristband"/>
+        </div>
+        <label class="col-sm-2 col-form-label">Hub ID:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" step="1" name="hub"/>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
 </form>
 <table>
     <tr>
