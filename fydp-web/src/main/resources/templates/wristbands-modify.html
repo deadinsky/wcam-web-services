@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Modify Wristband</title>
+    <title>Assign Wristbands</title>
+    <link th:replace="../fragments/general.html :: bootstrap"/>
     <link th:replace="../fragments/general.html :: stylesheet"/>
 </head>
 <body>
@@ -11,8 +12,7 @@
     <table>
         <tr>
             <th>MAC Address</th>
-            <th>Nickname</th>
-            <th>User</th>
+            <th>Nickname</th>\
             <th>X</th>
             <th>Y</th>
             <th>Z</th>
@@ -29,13 +29,27 @@
             <td th:text="${detailedWristband.timeStamp}">timeStamp</td>
         </tr>
     </table>
-    <div>
-        <label>MAC: <input type="text" name="macAddress" pattern="([0-9A-F]{2}:){5}[0-9A-F]{2}"/></label>
-        <label>Name: <input type="text" name="nickname" minlength="1" maxlength="30"/></label>
-        <label>User ID: <input type="number" step="1" name="user"/></label>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">MAC:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="macAddress" pattern="([0-9A-F]{2}:){5}[0-9A-F]{2}"/>
+            <small class="form-text text-muted">Use uppercase letters if needed. Separate each byte by a colon.</small>
+        </div>
     </div>
-    <div>
-        <input type="submit" value="Modify"/>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="nickname" minlength="1" maxlength="30"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">User ID:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" step="1" name="user"/>
+        </div>
+        <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary">Modify</button>
+        </div>
     </div>
 </form>
 <footer th:replace="../fragments/general.html :: footer"></footer>
