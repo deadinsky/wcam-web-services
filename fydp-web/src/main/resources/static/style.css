@@ -13,3 +13,14 @@ button a:hover {
     color: #fff;
     text-decoration: none;
 }
+.alert.alert-danger {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+body {
+    padding-bottom: 50px;
+}
+form,h1,h2,p {
+    padding: 0 15px;
+}

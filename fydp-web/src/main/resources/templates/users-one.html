@@ -8,6 +8,7 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
+<h1>Profile</h1>
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -39,7 +40,7 @@
     </tbody>
 </table>
 <br/>
-<p>Wristbands:</p>
+<h2>Wristbands</h2>
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -67,6 +68,7 @@
         </tr>
     </tbody>
 </table>
-<footer th:replace="../fragments/general.html :: footer"></footer>
+<div th:replace="../fragments/general.html :: alert"></div>
+<div th:replace="../fragments/general.html :: footer"></div>
 </body>
 </html>

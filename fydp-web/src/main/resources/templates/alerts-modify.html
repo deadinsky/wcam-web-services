@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
-
+<h1>Modify Alert</h1>
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -42,6 +42,7 @@
 <button class="btn btn-primary">
     <a th:href="@{/alerts/resolve/{id}(id=${alert.id})}">Resolve Alert</a>
 </button>
-<footer th:replace="../fragments/general.html :: footer"></footer>
+<div th:replace="../fragments/general.html :: alert"></div>
+<div th:replace="../fragments/general.html :: footer"></div>
 </body>
 </html>

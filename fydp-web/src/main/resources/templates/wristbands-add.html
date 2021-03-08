@@ -8,6 +8,7 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
+<h1>Add Wristband</h1>
 <form th:action="@{/wristbands/add}" method="post">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">MAC:</label>
@@ -33,6 +34,7 @@
     </div>
     <button th:unless="${isAdmin}" type="submit" class="btn btn-primary">Add</button>
 </form>
-<footer th:replace="../fragments/general.html :: footer"></footer>
+<div th:replace="../fragments/general.html :: alert"></div>
+<div th:replace="../fragments/general.html :: footer"></div>
 </body>
 </html>

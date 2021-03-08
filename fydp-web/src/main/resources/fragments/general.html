@@ -6,25 +6,6 @@
     <link th:fragment="stylesheet" th:rel="stylesheet"  th:href="@{/style.css}"/>
 </head>
 <body>
-<header th:fragment="header">
-    <div th:if="${isEnabled}">
-        <h6 th:if="${isAdmin}"><a th:href="@{/hubs}">Hubs</a></h6>
-        <h6 th:if="${isAdmin}"><a th:href="@{/locations}">Locations</a></h6>
-        <h6 th:if="${isAdmin}"><a th:href="@{/values}">Values</a></h6>
-        <h6 th:if="${isEnabled}"><a th:href="@{/wristbands}">Wristbands</a></h6>
-        <h6 th:if="${isManager}"><a th:href="@{/wristbands/modify}">::Assign</a></h6>
-        <h6 th:if="${isAdmin || isManager}"><a th:href="@{/alerts}">Alerts</a></h6>
-        <h6 th:if="${isAdmin}"><a th:href="@{/alerts/phones}">::Phones</a></h6>
-        <h6 th:if="${isEnabled && !isManager}"><a th:href="@{/profiles}">Profile</a></h6>
-        <h6 th:if="${isEnabled}"><a th:href="@{/logout}">Logout</a></h6>
-        <h6 th:if="${isLoggedOut}"><a th:href="@{/login}">Login</a></h6>
-        <h6 th:if="${isLoggedOut}"><a th:href="@{/signup}">Signup</a></h6>
-    </div>
-    <div th:unless="${isEnabled}">
-        <h6><a th:href="@{/login}">Login</a></h6>
-        <h6><a th:href="@{/signup}">Signup</a></h6>
-    </div>
-</header>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" th:href="@{/}">WCAM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +20,7 @@
             <li th:if="${isAdmin}" class="nav-item">
                 <a class="nav-link" th:href="@{/locations}">Locations</a>
             </li>
-            <li th:if="${isEnabled}" class="nav-item">
+            <li th:if="${isAdmin}" class="nav-item">
                 <a class="nav-link" th:href="@{/values}">Values</a>
             </li>
             <li th:if="${isEnabled}" class="nav-item">
@@ -77,11 +58,13 @@
         </ul>
     </div>
 </nav>
-<footer th:fragment="footer">
-    <h6 th:if="${existsActiveSevereAlert}" th:text="${alertText}">alertText</h6>
+<div th:fragment="alert" th:if="${existsActiveSevereAlert}">
+    <div class="alert alert-danger" role="alert" th:text="${alertText}">alertText</div>
+</div>
+<div th:fragment="footer">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</footer>
+</div>
 </body>
 </html>

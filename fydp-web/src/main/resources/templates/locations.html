@@ -8,6 +8,7 @@
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
+<h1>Locations</h1>
 <form th:action="@{/locations}" method="get">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Type:</label>
@@ -73,6 +74,7 @@
         </tr>
     </tbody>
 </table>
-<footer th:replace="../fragments/general.html :: footer"></footer>
+<div th:replace="../fragments/general.html :: alert"></div>
+<div th:replace="../fragments/general.html :: footer"></div>
 </body>
 </html>
