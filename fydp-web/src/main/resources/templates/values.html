@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://wwww.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Values</title>
+    <title th:text="${title}">Values</title>
     <link th:replace="../fragments/general.html :: bootstrap"/>
     <link th:replace="../fragments/general.html :: stylesheet"/>
 </head>
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
-<h1>Values</h1>
+<h1 th:text="${title}">Values</h1>
 <form th:action="@{/values}" method="get">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Type:</label>

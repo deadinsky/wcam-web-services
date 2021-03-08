@@ -76,15 +76,19 @@ public class ValueController {
         if (wristband == null) {
             switch (type) {
                 case "ecg":
+                    model.addAttribute("title", "ECG Values");
                     model.addAttribute("values", valueService.getAllECGValues(PageRequest.of(pageNum, pageSize)));
                     break;
                 case "heartrate":
+                    model.addAttribute("title", "Heart Rate Values");
                     model.addAttribute("values", valueService.getAllHeartRateValues(PageRequest.of(pageNum, pageSize)));
                     break;
                 case "oxygen":
+                    model.addAttribute("title", "SpO2 Values");
                     model.addAttribute("values", valueService.getAllOxygenValues(PageRequest.of(pageNum, pageSize)));
                     break;
                 case "skintemp":
+                    model.addAttribute("title", "Skin Temp. Values");
                     model.addAttribute("values", valueService.getAllSkinTempValues(PageRequest.of(pageNum, pageSize)));
                     break;
                 default:
@@ -94,15 +98,19 @@ public class ValueController {
         }
         switch (type) {
             case "ecg":
+                model.addAttribute("title", "ECG Values");
                 model.addAttribute("values", valueService.getECGValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             case "heartrate":
+                model.addAttribute("title", "Heart Rate Values");
                 model.addAttribute("values", valueService.getHeartRateValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             case "oxygen":
+                model.addAttribute("title", "SpO2 Values");
                 model.addAttribute("values", valueService.getOxygenValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             case "skintemp":
+                model.addAttribute("title", "Skin Temp. Values");
                 model.addAttribute("values", valueService.getSkinTempValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
                 break;
             default:

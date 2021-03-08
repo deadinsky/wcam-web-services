@@ -86,6 +86,7 @@ public class LocationController {
         Utilities.addModelAttributes(model, userPrincipal.getUser());
         switch (type) {
             case "hub":
+                model.addAttribute("title", "Hub Locations");
                 if (hub == null) {
                     model.addAttribute("hubLocations", locationService.getAllHubLocations(PageRequest.of(pageNum, pageSize)));
                 } else {
@@ -93,6 +94,7 @@ public class LocationController {
                 }
                 break;
             case "wristband":
+                model.addAttribute("title", "Wristband Locations");
                 if (wristband == null) {
                     model.addAttribute("wristbandLocations", locationService.getAllWristbandLocations(PageRequest.of(pageNum, pageSize)));
                 } else {
