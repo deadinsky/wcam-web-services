@@ -14,33 +14,49 @@
         <label class="col-sm-2 col-form-label">Type:</label>
         <div class="col-sm-10">
             <select class="form-control" name="type">
-                <option value="ecg">ECG</option>
-                <option value="heartrate">Heart Rate</option>
-                <option value="oxygen">Sp02</option>
-                <option value="skintemp">Skin Temp.</option>
+                <option value="ecg" th:selected="${type=='ecg'}">ECG</option>
+                <option value="heartrate" th:selected="${type=='heartrate'}">Heart Rate</option>
+                <option value="oxygen" th:selected="${type=='oxygen'}">Sp02</option>
+                <option value="skintemp" th:selected="${type=='skintemp'}">Skin Temp.</option>
             </select>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Page Num:</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" step="1" name="pageNum"/>
+            <input type="number" class="form-control" step="1" name="pageNum" th:value="${pageNum}"/>
         </div>
         <label class="col-sm-2 col-form-label">Page Size:</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" step="1" name="pageSize"/>
+            <input type="number" class="form-control" step="1" name="pageSize" th:value="${pageSize}"/>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Wristband ID:</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" step="1" name="wristband"/>
+            <input type="number" class="form-control" step="1" name="wristband" th:value="${wristband}"/>
         </div>
         <div class="col-sm-6">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </div>
 </form>
+<button th:if="${pageNum == 0}" type="button" class="btn btn-default btn-arrow btn-left" disabled>
+    <span aria-hidden="true">←</span>
+</button>
+<a th:unless="${pageNum == 0}" th:href="@{/values(type=${type},pageNum=${pageNum - 1},pageSize=${pageSize},wristband=${wristband})}">
+    <button type="button" class="btn btn-default btn-arrow btn-left">
+        <span aria-hidden="true">←</span>
+    </button>
+</a>
+<button th:if="${lastCount == total}" type="button" class="btn btn-default btn-arrow btn-right" disabled>
+    <span aria-hidden="true">→</span>
+</button>
+<a th:unless="${lastCount == total}" th:href="@{/values(type=${type},pageNum=${pageNum + 1},pageSize=${pageSize},wristband=${wristband})}">
+    <button type="button" class="btn btn-default btn-arrow btn-right">
+        <span aria-hidden="true">→</span>
+    </button>
+</a>
 <table class="table">
     <thead class="thead-light">
         <tr>

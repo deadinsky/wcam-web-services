@@ -84,6 +84,11 @@ public class LocationController {
             return redirectString;
         }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
+        model.addAttribute("type", type);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("hub", (hub != null ? hub.getId() : ""));
+        model.addAttribute("wristband", (wristband != null ? wristband.getId() : ""));
         long total = 0;
         switch (type) {
             case "hub":

@@ -1,10 +1,8 @@
-@media(min-width: 576px) {
-    .col-form-label {
-        text-align: right;
-    }
-    button {
-        float: right;
-    }
+body {
+    padding-bottom: 50px;
+}
+form,h1,h2,p {
+    padding: 0 15px;
 }
 button a {
     color: #fff;
@@ -18,9 +16,28 @@ button a:hover {
     position: fixed;
     width: 100%;
 }
-body {
-    padding-bottom: 50px;
+.btn-arrow {
+    font-size: 35px;
+    padding: 0px 5px 5px;
+    margin: 10px;
+    line-height: 0.6;
+    color: white;
+    background-color: lightslategray;
 }
-form,h1,h2,p {
-    padding: 0 15px;
+.btn-right {
+    float: right;
 }
+.btn-left {
+    float: left;
+}
+.btn:disabled:hover {
+    color: white;
+}
+@media(min-width: 576px) {
+     .col-form-label {
+         text-align: right;
+     }
+     button {
+         float: right;
+     }
+ }
