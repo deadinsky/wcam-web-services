@@ -47,6 +47,12 @@ public class LocationService {
     public Page<WristbandLocation> getWristbandLocationsByWristband(Wristband wristband, Pageable pageable) {
         return wristbandLocationRepository.findByWristband(wristband, pageable);
     }
+    public long countWristbandLocations() {
+        return wristbandLocationRepository.count();
+    }
+    public long countWristbandLocationsByWristband(Wristband wristband) {
+        return wristbandLocationRepository.countByWristband(wristband);
+    }
 
     public List<HubLocation> getAllHubLocations() {
         return hubLocationRepository.findAll();
@@ -59,6 +65,12 @@ public class LocationService {
     }
     public Page<HubLocation> getHubLocationsByHub(Hub hub, Pageable pageable) {
         return hubLocationRepository.findByHub(hub, pageable);
+    }
+    public long countHubLocations() {
+        return hubLocationRepository.count();
+    }
+    public long countHubLocationsByHub(Hub hub) {
+        return hubLocationRepository.countByHub(hub);
     }
 
 }

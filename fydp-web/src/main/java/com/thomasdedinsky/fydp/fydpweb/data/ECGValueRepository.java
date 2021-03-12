@@ -11,4 +11,5 @@ import java.util.List;
 public interface ECGValueRepository extends JpaRepository<ECGValue, Long> {
     List<ECGValue> findByWristband(Wristband wristband);
     Page<ECGValue> findByWristband(Wristband wristband, Pageable pageable);
+    long countByWristband(Wristband wristband);
 }

@@ -31,7 +31,7 @@ public class LocationController {
         }
         if (pageSize < 1) {
             willRedirect = true;
-            pageSize = 1;
+            pageSize = 50;
         }
         if (pageSize > PAGE_SIZE_LIMIT) {
             willRedirect = true;
@@ -84,21 +84,38 @@ public class LocationController {
             return redirectString;
         }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
+        long total = 0;
         switch (type) {
             case "hub":
                 model.addAttribute("title", "Hub Locations");
                 if (hub == null) {
                     model.addAttribute("hubLocations", locationService.getAllHubLocations(PageRequest.of(pageNum, pageSize)));
+                    total = locationService.countHubLocations();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                 } else {
                     model.addAttribute("hubLocations", locationService.getHubLocationsByHub(hub, PageRequest.of(pageNum, pageSize)));
+                    total = locationService.countHubLocationsByHub(hub);
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                 }
                 break;
             case "wristband":
                 model.addAttribute("title", "Wristband Locations");
                 if (wristband == null) {
                     model.addAttribute("wristbandLocations", locationService.getAllWristbandLocations(PageRequest.of(pageNum, pageSize)));
+                    total = locationService.countWristbandLocations();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                 } else {
                     model.addAttribute("wristbandLocations", locationService.getWristbandLocationsByWristband(wristband, PageRequest.of(pageNum, pageSize)));
+                    total = locationService.countWristbandLocationsByWristband(wristband);
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                 }
                 break;
             default:

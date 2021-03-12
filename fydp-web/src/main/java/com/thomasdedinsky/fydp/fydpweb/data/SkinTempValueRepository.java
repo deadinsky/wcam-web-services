@@ -11,4 +11,5 @@ import java.util.List;
 public interface SkinTempValueRepository extends JpaRepository<SkinTempValue, Long> {
     List<SkinTempValue> findByWristband(Wristband wristband);
     Page<SkinTempValue> findByWristband(Wristband wristband, Pageable pageable);
+    long countByWristband(Wristband wristband);
 }

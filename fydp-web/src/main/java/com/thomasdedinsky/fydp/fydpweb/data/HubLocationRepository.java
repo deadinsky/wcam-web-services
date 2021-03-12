@@ -20,4 +20,5 @@ public interface HubLocationRepository extends JpaRepository<HubLocation, Long> 
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(h.id), h.hub) " +
             "FROM HubLocation h GROUP BY h.hub")
     List<DetailedIntermediate> findAllDetailedHubsIntermediate();
+    long countByHub(Hub hub);
 }

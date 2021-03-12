@@ -32,11 +32,11 @@ public class ValueController {
         if (type == null || (!type.equals("ecg") && !type.equals("heartrate") &&
                 !type.equals("oxygen") && !type.equals("skintemp"))) {
             willRedirect = true;
-            type = "ecg";
+            type = "heartrate";
         }
         if (pageSize < 1) {
             willRedirect = true;
-            pageSize = 1;
+            pageSize = 50;
         }
         if (pageSize > PAGE_SIZE_LIMIT) {
             willRedirect = true;
@@ -73,23 +73,40 @@ public class ValueController {
             return redirectString;
         }
         Utilities.addModelAttributes(model, userPrincipal.getUser());
+        long total = 0;
         if (wristband == null) {
             switch (type) {
                 case "ecg":
                     model.addAttribute("title", "ECG Values");
                     model.addAttribute("values", valueService.getAllECGValues(PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countECGValues();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                     break;
                 case "heartrate":
                     model.addAttribute("title", "Heart Rate Values");
                     model.addAttribute("values", valueService.getAllHeartRateValues(PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countHeartRateValues();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                     break;
                 case "oxygen":
                     model.addAttribute("title", "SpO2 Values");
                     model.addAttribute("values", valueService.getAllOxygenValues(PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countOxygenValues();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                     break;
                 case "skintemp":
                     model.addAttribute("title", "Skin Temp. Values");
                     model.addAttribute("values", valueService.getAllSkinTempValues(PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countSkinTempValues();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
                     break;
                 default:
                     break;
@@ -100,18 +117,34 @@ public class ValueController {
             case "ecg":
                 model.addAttribute("title", "ECG Values");
                 model.addAttribute("values", valueService.getECGValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
+                total = valueService.countECGValuesByWristband(wristband);
+                model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                model.addAttribute("total", total);
                 break;
             case "heartrate":
                 model.addAttribute("title", "Heart Rate Values");
                 model.addAttribute("values", valueService.getHeartRateValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
+                total = valueService.countHeartRateValuesByWristband(wristband);
+                model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                model.addAttribute("total", total);
                 break;
             case "oxygen":
                 model.addAttribute("title", "SpO2 Values");
                 model.addAttribute("values", valueService.getOxygenValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
+                total = valueService.countOxygenValuesByWristband(wristband);
+                model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                model.addAttribute("total", total);
                 break;
             case "skintemp":
                 model.addAttribute("title", "Skin Temp. Values");
                 model.addAttribute("values", valueService.getSkinTempValuesByWristband(wristband, PageRequest.of(pageNum, pageSize)));
+                total = valueService.countSkinTempValuesByWristband(wristband);
+                model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                model.addAttribute("total", total);
                 break;
             default:
                 break;

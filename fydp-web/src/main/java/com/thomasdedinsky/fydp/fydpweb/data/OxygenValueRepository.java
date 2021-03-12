@@ -11,4 +11,5 @@ import java.util.List;
 public interface OxygenValueRepository extends JpaRepository<OxygenValue, Long> {
     List<OxygenValue> findByWristband(Wristband wristband);
     Page<OxygenValue> findByWristband(Wristband wristband, Pageable pageable);
+    long countByWristband(Wristband wristband);
 }

@@ -36,6 +36,12 @@ public class ValueService {
     public Page<ECGValue> getECGValuesByWristband(Wristband wristband, Pageable pageable) {
         return ecgValueRepository.findByWristband(wristband, pageable);
     }
+    public long countECGValues() {
+        return ecgValueRepository.count();
+    }
+    public long countECGValuesByWristband(Wristband wristband) {
+        return ecgValueRepository.countByWristband(wristband);
+    }
 
     public List<HeartRateValue> getAllHeartRateValues() {
         return heartRateValueRepository.findAll();
@@ -48,6 +54,12 @@ public class ValueService {
     }
     public Page<HeartRateValue> getHeartRateValuesByWristband(Wristband wristband, Pageable pageable) {
         return heartRateValueRepository.findByWristband(wristband, pageable);
+    }
+    public long countHeartRateValues() {
+        return heartRateValueRepository.count();
+    }
+    public long countHeartRateValuesByWristband(Wristband wristband) {
+        return heartRateValueRepository.countByWristband(wristband);
     }
 
     public List<OxygenValue> getAllOxygenValues() {
@@ -62,6 +74,12 @@ public class ValueService {
     public Page<OxygenValue> getOxygenValuesByWristband(Wristband wristband, Pageable pageable) {
         return oxygenValueRepository.findByWristband(wristband, pageable);
     }
+    public long countOxygenValues() {
+        return oxygenValueRepository.count();
+    }
+    public long countOxygenValuesByWristband(Wristband wristband) {
+        return oxygenValueRepository.countByWristband(wristband);
+    }
 
     public List<SkinTempValue> getAllSkinTempValues() {
         return skinTempValueRepository.findAll();
@@ -74,5 +92,11 @@ public class ValueService {
     }
     public Page<SkinTempValue> getSkinTempValuesByWristband(Wristband wristband, Pageable pageable) {
         return skinTempValueRepository.findByWristband(wristband, pageable);
+    }
+    public long countSkinTempValues() {
+        return skinTempValueRepository.count();
+    }
+    public long countSkinTempValuesByWristband(Wristband wristband) {
+        return skinTempValueRepository.countByWristband(wristband);
     }
 }
