@@ -30,14 +30,6 @@ public class WristbandService {
         return wristbandRepository.save(wristband);
     }
 
-    public List<Wristband> getAllWristbands() {
-        return wristbandRepository.findAll();
-    }
-
-    public Page<Wristband> getAllWristbands(Pageable pageable) {
-        return wristbandRepository.findAll(pageable);
-    }
-
     public List<Wristband> getWristbandsByUser(User user) {
         return wristbandRepository.findByUser(user);
     }

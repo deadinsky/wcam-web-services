@@ -4,6 +4,7 @@ import com.thomasdedinsky.fydp.fydpweb.Utilities;
 import com.thomasdedinsky.fydp.fydpweb.auth.UserPrincipal;
 import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
 import com.thomasdedinsky.fydp.fydpweb.services.ValueService;
+import com.thomasdedinsky.fydp.fydpweb.services.WristbandService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,12 @@ import java.util.List;
 @RequestMapping("/values")
 public class ValueController {
     private final ValueService valueService;
+    private final WristbandService wristbandService;
     private final static int PAGE_SIZE_LIMIT = 100;
 
-    public ValueController(ValueService valueService) {
+    public ValueController(ValueService valueService, WristbandService wristbandService) {
         this.valueService = valueService;
+        this.wristbandService = wristbandService;
     }
 
     public static String redirectWithParams(String type, int pageSize, int pageNum, Wristband wristband) {
@@ -64,8 +67,8 @@ public class ValueController {
                             @RequestParam(name = "pageSize", defaultValue = "-1") int pageSize,
                             @RequestParam(name = "pageNum", defaultValue = "-1") int pageNum,
                             @RequestParam(name = "wristband", required = false) Wristband wristband) {
-        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) && (wristband == null ||
-                !wristband.getUser().equals(userPrincipal.getUser()))) {
+        if (!userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin) && wristband != null &&
+                !wristband.getUser().equals(userPrincipal.getUser())) {
             return "redirect:/";
         }
         String redirectString = redirectWithParams(type, pageSize, pageNum, wristband);
@@ -78,7 +81,7 @@ public class ValueController {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("wristband", (wristband != null ? wristband.getId() : ""));
         long total = 0;
-        if (wristband == null) {
+        if (wristband == null && userPrincipal.getAuthorities().contains(userPrincipal.authorityAdmin)) {
             switch (type) {
                 case "ecg":
                     model.addAttribute("title", "ECG Values");
@@ -108,6 +111,46 @@ public class ValueController {
                     model.addAttribute("title", "Skin Temp. Values");
                     model.addAttribute("values", valueService.getAllSkinTempValues(PageRequest.of(pageNum, pageSize)));
                     total = valueService.countSkinTempValues();
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
+                    break;
+                default:
+                    break;
+            }
+            return "values";
+        }
+        if (wristband == null) {
+            List<Wristband> wristbandList = wristbandService.getWristbandsByUser(userPrincipal.getUser());
+            switch (type) {
+                case "ecg":
+                    model.addAttribute("title", "ECG Values");
+                    model.addAttribute("values", valueService.getECGValuesByWristbandIn(wristbandList, PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countECGValuesByWristbandIn(wristbandList);
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
+                    break;
+                case "heartrate":
+                    model.addAttribute("title", "Heart Rate Values");
+                    model.addAttribute("values", valueService.getHeartRateValuesByWristbandIn(wristbandList, PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countHeartRateValuesByWristbandIn(wristbandList);
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
+                    break;
+                case "oxygen":
+                    model.addAttribute("title", "SpO2 Values");
+                    model.addAttribute("values", valueService.getOxygenValuesByWristbandIn(wristbandList, PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countOxygenValuesByWristbandIn(wristbandList);
+                    model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
+                    model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
+                    model.addAttribute("total", total);
+                    break;
+                case "skintemp":
+                    model.addAttribute("title", "Skin Temp. Values");
+                    model.addAttribute("values", valueService.getSkinTempValuesByWristbandIn(wristbandList, PageRequest.of(pageNum, pageSize)));
+                    total = valueService.countSkinTempValuesByWristbandIn(wristbandList);
                     model.addAttribute("firstCount", Math.min(total, pageSize * pageNum + 1));
                     model.addAttribute("lastCount", Math.min(total, pageSize * (pageNum + 1)));
                     model.addAttribute("total", total);

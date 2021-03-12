@@ -13,10 +13,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface WristbandLocationRepository extends JpaRepository<WristbandLocation, Long> {
-    List<WristbandLocation> findByWristband(Wristband wristband);
     Page<WristbandLocation> findByWristband(Wristband wristband, Pageable pageable);
-    List<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList);
-    Page<WristbandLocation> findByWristbandIn(List<Wristband> wristbandList, Pageable pageable);
     List<WristbandLocation> findByIdIn(List<Long> idList);
     @Query(value = "SELECT " +
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(w.id), w.wristband) " +

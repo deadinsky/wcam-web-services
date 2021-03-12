@@ -12,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface HubLocationRepository extends JpaRepository<HubLocation, Long> {
-    List<HubLocation> findByHub(Hub hub);
     Page<HubLocation> findByHub(Hub hub, Pageable pageable);
     List<HubLocation> findByIdIn(List<Long> idList);
     HubLocation findFirstByHubOrderByTimeStampDesc(Hub hub);

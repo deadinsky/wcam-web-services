@@ -20,7 +20,7 @@
             <li th:if="${isAdmin}" class="nav-item">
                 <a class="nav-link" th:href="@{/locations}">Locations</a>
             </li>
-            <li th:if="${isAdmin}" class="nav-item">
+            <li th:if="${isEnabled}" class="nav-item">
                 <a class="nav-link" th:href="@{/values}">Values</a>
             </li>
             <li th:if="${isEnabled}" class="nav-item">
@@ -35,7 +35,7 @@
             <li th:if="${isAdmin}" class="nav-item">
                 <a class="nav-link" th:href="@{/alerts/phones}">::Phones</a>
             </li>
-            <li th:if="${isEnabled && !isManager}" class="nav-item">
+            <li th:if="${isEnabled}" class="nav-item">
                 <a class="nav-link" th:href="@{/profiles}">Profile</a>
             </li>
             <li th:if="${isEnabled}" class="nav-item">

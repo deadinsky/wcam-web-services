@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ECGValueRepository extends JpaRepository<ECGValue, Long> {
-    List<ECGValue> findByWristband(Wristband wristband);
     Page<ECGValue> findByWristband(Wristband wristband, Pageable pageable);
+    Page<ECGValue> findByWristbandIn(List<Wristband> wristbandList, Pageable pageable);
     long countByWristband(Wristband wristband);
+    long countByWristbandIn(List<Wristband> wristbandList);
 }
