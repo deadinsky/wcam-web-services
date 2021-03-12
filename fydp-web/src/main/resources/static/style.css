@@ -1,7 +1,7 @@
 body {
     padding-bottom: 50px;
 }
-form,h1,h2,p {
+form, h1, h2, p {
     padding: 0 15px;
 }
 button a {
@@ -40,4 +40,12 @@ button a:hover {
      button {
          float: right;
      }
- }
+}
+@media(max-width: 991px) {
+     .navbar {
+         font-size: 3.5rem;
+     }
+     .alert, .navbar-brand, .navbar-toggler {
+         font-size: 4rem;
+     }
+}
