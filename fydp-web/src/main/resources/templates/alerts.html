@@ -12,30 +12,31 @@
 <table class="table">
     <thead class="thead-light">
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Wristband MAC</th>
+            <th scope="col">MAC Address</th>
+            <th scope="col">Nickname</th>
             <th scope="col">Message</th>
             <th scope="col">Is Severe?</th>
             <th scope="col">Is Active?</th>
             <th scope="col">Contact Status</th>
             <th scope="col">Timestamp</th>
+            <th scope="col">Remove?</th>
         </tr>
     </thead>
     <tbody>
         <tr th:each="alert:${alerts}">
             <td>
-                <a th:text="${alert.id}"
-                   th:href="@{/alerts/modify/{id}(id=${alert.id})}">id</a>
-            </td>
-            <td>
                 <a th:text="${alert.wristband.macAddress}"
-                   th:href="@{/wristbands/{id}(id=${alert.wristband.id})}">macAddress</a>
+                   th:href="@{/wristbands/{id}(id=${alert?.wristband.id})}">macAddress</a>
             </td>
+            <td th:text="${alert?.wristband.nickname}">nickname</td>
             <td th:text="${alert.message}">message</td>
             <td th:text="${alert.isSevere}">isSevere</td>
             <td th:text="${alert.isActive}">isActive</td>
             <td th:text="${alert.contactStatus}">contactStatus</td>
             <td th:text="${alert.timeStamp}">timeStamp</td>
+            <td>
+                <a th:href="@{/alerts/resolve/{id}(id=${alert.id})}">remove</a>
+            </td>
         </tr>
     </tbody>
 </table>
