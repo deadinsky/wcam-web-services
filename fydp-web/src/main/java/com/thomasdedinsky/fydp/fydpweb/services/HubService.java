@@ -32,14 +32,6 @@ public class HubService {
         return hubLocationRepository.save(hubLocation);
     }
 
-    public List<Hub> getAllHubs() {
-        return hubRepository.findAll();
-    }
-
-    public Page<Hub> getAllHubs(Pageable pageable) {
-        return hubRepository.findAll(pageable);
-    }
-
     public HubLocation getDetailedHub(Hub hub) {
         HubLocation hubLocation = hubLocationRepository.findFirstByHubOrderByTimeStampDesc(hub);
         if (hubLocation == null) {

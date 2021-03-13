@@ -17,13 +17,10 @@ import java.util.List;
 @Service
 public class LocationService {
     private final HubLocationRepository hubLocationRepository;
-    private final WristbandRepository wristbandRepository;
     private final WristbandLocationRepository wristbandLocationRepository;
 
-    public LocationService(HubLocationRepository hubLocationRepository, WristbandRepository wristbandRepository,
-                           WristbandLocationRepository wristbandLocationRepository) {
+    public LocationService(HubLocationRepository hubLocationRepository, WristbandLocationRepository wristbandLocationRepository) {
         this.hubLocationRepository = hubLocationRepository;
-        this.wristbandRepository = wristbandRepository;
         this.wristbandLocationRepository = wristbandLocationRepository;
     }
 
@@ -31,7 +28,7 @@ public class LocationService {
         return wristbandLocationRepository.findAll(pageable);
     }
     public Page<WristbandLocation> getWristbandLocationsByWristband(Wristband wristband, Pageable pageable) {
-        return wristbandLocationRepository.findByWristband(wristband, pageable);
+        return wristbandLocationRepository.findByWristbandOrderByTimeStampDesc(wristband, pageable);
     }
     public long countWristbandLocations() {
         return wristbandLocationRepository.count();
@@ -44,7 +41,7 @@ public class LocationService {
         return hubLocationRepository.findAll(pageable);
     }
     public Page<HubLocation> getHubLocationsByHub(Hub hub, Pageable pageable) {
-        return hubLocationRepository.findByHub(hub, pageable);
+        return hubLocationRepository.findByHubOrderByTimeStampDesc(hub, pageable);
     }
     public long countHubLocations() {
         return hubLocationRepository.count();

@@ -9,8 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OxygenValueRepository extends JpaRepository<OxygenValue, Long> {
-    Page<OxygenValue> findByWristband(Wristband wristband, Pageable pageable);
-    Page<OxygenValue> findByWristbandIn(List<Wristband> wristbandList, Pageable pageable);
+    Page<OxygenValue> findAllByOrderByTimeStampDesc(Pageable pageable);
+    Page<OxygenValue> findByWristbandOrderByTimeStampDesc(Wristband wristband, Pageable pageable);
+    Page<OxygenValue> findByWristbandInOrderByTimeStampDesc(List<Wristband> wristbandList, Pageable pageable);
     long countByWristband(Wristband wristband);
     long countByWristbandIn(List<Wristband> wristbandList);
 }

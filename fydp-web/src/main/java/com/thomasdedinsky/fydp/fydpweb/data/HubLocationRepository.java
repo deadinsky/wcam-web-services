@@ -12,7 +12,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface HubLocationRepository extends JpaRepository<HubLocation, Long> {
-    Page<HubLocation> findByHub(Hub hub, Pageable pageable);
+    Page<HubLocation> findByHubOrderByTimeStampDesc(Hub hub, Pageable pageable);
     List<HubLocation> findByIdIn(List<Long> idList);
     HubLocation findFirstByHubOrderByTimeStampDesc(Hub hub);
     @Query(value = "SELECT " +

@@ -26,13 +26,13 @@ public class ValueService {
     }
 
     public Page<ECGValue> getAllECGValues(Pageable pageable) {
-        return ecgValueRepository.findAll(pageable);
+        return ecgValueRepository.findAllByOrderByTimeStampDesc(pageable);
     }
     public Page<ECGValue> getECGValuesByWristband(Wristband wristband, Pageable pageable) {
-        return ecgValueRepository.findByWristband(wristband, pageable);
+        return ecgValueRepository.findByWristbandOrderByTimeStampDesc(wristband, pageable);
     }
     public Page<ECGValue> getECGValuesByWristbandIn(List<Wristband> wristbandList, Pageable pageable) {
-        return ecgValueRepository.findByWristbandIn(wristbandList, pageable);
+        return ecgValueRepository.findByWristbandInOrderByTimeStampDesc(wristbandList, pageable);
     }
     public long countECGValues() {
         return ecgValueRepository.count();
@@ -45,13 +45,13 @@ public class ValueService {
     }
 
     public Page<HeartRateValue> getAllHeartRateValues(Pageable pageable) {
-        return heartRateValueRepository.findAll(pageable);
+        return heartRateValueRepository.findAllByOrderByTimeStampDesc(pageable);
     }
     public Page<HeartRateValue> getHeartRateValuesByWristband(Wristband wristband, Pageable pageable) {
-        return heartRateValueRepository.findByWristband(wristband, pageable);
+        return heartRateValueRepository.findByWristbandOrderByTimeStampDesc(wristband, pageable);
     }
     public Page<HeartRateValue> getHeartRateValuesByWristbandIn(List<Wristband> wristbandList, Pageable pageable) {
-        return heartRateValueRepository.findByWristbandIn(wristbandList, pageable);
+        return heartRateValueRepository.findByWristbandInOrderByTimeStampDesc(wristbandList, pageable);
     }
     public long countHeartRateValues() {
         return heartRateValueRepository.count();
@@ -64,13 +64,13 @@ public class ValueService {
     }
 
     public Page<OxygenValue> getAllOxygenValues(Pageable pageable) {
-        return oxygenValueRepository.findAll(pageable);
+        return oxygenValueRepository.findAllByOrderByTimeStampDesc(pageable);
     }
     public Page<OxygenValue> getOxygenValuesByWristband(Wristband wristband, Pageable pageable) {
-        return oxygenValueRepository.findByWristband(wristband, pageable);
+        return oxygenValueRepository.findByWristbandOrderByTimeStampDesc(wristband, pageable);
     }
     public Page<OxygenValue> getOxygenValuesByWristbandIn(List<Wristband> wristbandList, Pageable pageable) {
-        return oxygenValueRepository.findByWristbandIn(wristbandList, pageable);
+        return oxygenValueRepository.findByWristbandInOrderByTimeStampDesc(wristbandList, pageable);
     }
     public long countOxygenValues() {
         return oxygenValueRepository.count();
@@ -83,13 +83,13 @@ public class ValueService {
     }
 
     public Page<SkinTempValue> getAllSkinTempValues(Pageable pageable) {
-        return skinTempValueRepository.findAll(pageable);
+        return skinTempValueRepository.findAllByOrderByTimeStampDesc(pageable);
     }
     public Page<SkinTempValue> getSkinTempValuesByWristband(Wristband wristband, Pageable pageable) {
-        return skinTempValueRepository.findByWristband(wristband, pageable);
+        return skinTempValueRepository.findByWristbandOrderByTimeStampDesc(wristband, pageable);
     }
     public Page<SkinTempValue> getSkinTempValuesByWristbandIn(List<Wristband> wristbandList, Pageable pageable) {
-        return skinTempValueRepository.findByWristbandIn(wristbandList, pageable);
+        return skinTempValueRepository.findByWristbandInOrderByTimeStampDesc(wristbandList, pageable);
     }
     public long countSkinTempValues() {
         return skinTempValueRepository.count();

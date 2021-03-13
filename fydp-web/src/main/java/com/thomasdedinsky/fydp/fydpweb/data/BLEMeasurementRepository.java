@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface BLEMeasurementRepository extends JpaRepository<BLEMeasurement, Long> {
-    Page<BLEMeasurement> findByWristband(Wristband wristband, Pageable pageable);
-    Page<BLEMeasurement> findByHub(Hub hub, Pageable pageable);
+    Page<BLEMeasurement> findAllByOrderByTimeStampDesc(Pageable pageable);
+    Page<BLEMeasurement> findByWristbandOrderByTimeStampDesc(Wristband wristband, Pageable pageable);
+    Page<BLEMeasurement> findByHubOrderByTimeStampDesc(Hub hub, Pageable pageable);
 }
