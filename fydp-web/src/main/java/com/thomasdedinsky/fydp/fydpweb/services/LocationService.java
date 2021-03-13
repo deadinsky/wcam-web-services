@@ -30,11 +30,17 @@ public class LocationService {
     public Page<WristbandLocation> getWristbandLocationsByWristband(Wristband wristband, Pageable pageable) {
         return wristbandLocationRepository.findByWristbandOrderByTimeStampDesc(wristband, pageable);
     }
+    public Page<WristbandLocation> getWristbandLocationsByWristbandIn(List<Wristband> wristbandList, Pageable pageable) {
+        return wristbandLocationRepository.findByWristbandInOrderByTimeStampDesc(wristbandList, pageable);
+    }
     public long countWristbandLocations() {
         return wristbandLocationRepository.count();
     }
     public long countWristbandLocationsByWristband(Wristband wristband) {
         return wristbandLocationRepository.countByWristband(wristband);
+    }
+    public long countWristbandLocationsByWristbandIn(List<Wristband> wristbandList) {
+        return wristbandLocationRepository.countByWristbandIn(wristbandList);
     }
 
     public Page<HubLocation> getAllHubLocations(Pageable pageable) {
@@ -43,11 +49,17 @@ public class LocationService {
     public Page<HubLocation> getHubLocationsByHub(Hub hub, Pageable pageable) {
         return hubLocationRepository.findByHubOrderByTimeStampDesc(hub, pageable);
     }
+    public Page<HubLocation> getHubLocationsByHubIn(List<Hub> hubList, Pageable pageable) {
+        return hubLocationRepository.findByHubInOrderByTimeStampDesc(hubList, pageable);
+    }
     public long countHubLocations() {
         return hubLocationRepository.count();
     }
     public long countHubLocationsByHub(Hub hub) {
         return hubLocationRepository.countByHub(hub);
+    }
+    public long countHubLocationsByHubIn(List<Hub> hubList) {
+        return hubLocationRepository.countByHubIn(hubList);
     }
 
 }

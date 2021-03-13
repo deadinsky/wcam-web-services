@@ -30,8 +30,16 @@ public class WristbandService {
         return wristbandRepository.save(wristband);
     }
 
+    public List<Wristband> getWristbandsByNickname(String nickname) {
+        return wristbandRepository.findByNickname(nickname);
+    }
+
     public List<Wristband> getWristbandsByUser(User user) {
         return wristbandRepository.findByUser(user);
+    }
+
+    public List<Wristband> getWristbandsByUserAndNickname(User user, String nickname) {
+        return wristbandRepository.findByUserAndNickname(user, nickname);
     }
 
     public List<WristbandLocation> getAllDetailedWristbands() {

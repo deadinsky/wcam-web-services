@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface WristbandRepository extends JpaRepository<Wristband, Long> {
+    List<Wristband> findByNickname(String nickname);
     List<Wristband> findByUser(User user);
+    List<Wristband> findByUserAndNickname(User user, String nickname);
     List<Wristband> findByIdNotIn(List<Long> idList);
     List<Wristband> findByIdNotInAndUser(List<Long> idList, User user);
 }

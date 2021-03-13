@@ -32,6 +32,10 @@ public class HubService {
         return hubLocationRepository.save(hubLocation);
     }
 
+    public List<Hub> getHubsByNickname(String nickname) {
+        return hubRepository.findByNickname(nickname);
+    }
+
     public HubLocation getDetailedHub(Hub hub) {
         HubLocation hubLocation = hubLocationRepository.findFirstByHubOrderByTimeStampDesc(hub);
         if (hubLocation == null) {

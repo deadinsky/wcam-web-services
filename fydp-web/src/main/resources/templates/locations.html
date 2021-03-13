@@ -30,13 +30,27 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Wristband ID:</label>
-        <div class="col-sm-4">
-            <input type="number" class="form-control" step="1" name="wristband" th:value="${wristband}"/>
-        </div>
         <label class="col-sm-2 col-form-label">Hub ID:</label>
         <div class="col-sm-4">
             <input type="number" class="form-control" step="1" name="hub" th:value="${hub}"/>
+            <small class="form-text text-muted">Found in URL for hub page.</small>
+        </div>
+        <label class="col-sm-2 col-form-label">Hub Name:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="hName" th:value="${hName}" minlength="1" maxlength="30"/>
+            <small class="form-text text-muted">Not unique. ID takes priority.</small>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Wristband ID:</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" step="1" name="wristband" th:value="${wristband}"/>
+            <small class="form-text text-muted">Found in URL for wristband page.</small>
+        </div>
+        <label class="col-sm-2 col-form-label">Wristband Name:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="wName" th:value="${wName}" minlength="1" maxlength="30"/>
+            <small class="form-text text-muted">Not unique. ID takes priority.</small>
         </div>
     </div>
     <div class="form-group row">
@@ -48,7 +62,7 @@
 <button th:if="${pageNum == 0}" type="button" class="btn btn-default btn-arrow btn-left" disabled>
     <span aria-hidden="true">←</span>
 </button>
-<a th:unless="${pageNum == 0}" th:href="@{/locations(type=${type},pageNum=${pageNum - 1},pageSize=${pageSize},hub=${hub},wristband=${wristband})}">
+<a th:unless="${pageNum == 0}" th:href="@{/locations(type=${type},pageNum=${pageNum - 1},pageSize=${pageSize},hub=${hub},hName=${hName},wristband=${wristband},wName=${wName})}">
     <button type="button" class="btn btn-default btn-arrow btn-left">
         <span aria-hidden="true">←</span>
     </button>
@@ -56,7 +70,7 @@
 <button th:if="${lastCount == total}" type="button" class="btn btn-default btn-arrow btn-right" disabled>
     <span aria-hidden="true">→</span>
 </button>
-<a th:unless="${lastCount == total}" th:href="@{/locations(type=${type},pageNum=${pageNum + 1},pageSize=${pageSize},hub=${hub},wristband=${wristband})}">
+<a th:unless="${lastCount == total}" th:href="@{/locations(type=${type},pageNum=${pageNum + 1},pageSize=${pageSize},hub=${hub},hName=${hName},wristband=${wristband},wName=${wName})}">
     <button type="button" class="btn btn-default btn-arrow btn-right">
         <span aria-hidden="true">→</span>
     </button>
@@ -65,6 +79,7 @@
     <thead class="thead-light">
         <tr>
             <th scope="col">MAC Address</th>
+            <th scope="col">Nickname</th>
             <th scope="col">X</th>
             <th scope="col">Y</th>
             <th scope="col">Z</th>
@@ -77,6 +92,7 @@
                 <a th:text="${location.hub.macAddress}"
                    th:href="@{/hubs/modify/{id}(id=${location.hub.id})}">macAddress</a>
             </td>
+            <td th:text="${location.hub.nickname}">nickname</td>
             <td th:text="${location.locationX}">locationX</td>
             <td th:text="${location.locationY}">locationY</td>
             <td th:text="${location.locationZ}">locationZ</td>
@@ -87,6 +103,7 @@
                 <a th:text="${location.wristband.macAddress}"
                    th:href="@{/wristbands/{id}(id=${location.wristband.id})}">macAddress</a>
             </td>
+            <td th:text="${location.wristband.nickname}">nickname</td>
             <td th:text="${location.locationX}">locationX</td>
             <td th:text="${location.locationY}">locationY</td>
             <td th:text="${location.locationZ}">locationZ</td>

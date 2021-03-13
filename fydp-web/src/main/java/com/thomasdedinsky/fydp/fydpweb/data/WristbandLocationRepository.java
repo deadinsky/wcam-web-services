@@ -14,6 +14,7 @@ import java.util.List;
 
 public interface WristbandLocationRepository extends JpaRepository<WristbandLocation, Long> {
     Page<WristbandLocation> findByWristbandOrderByTimeStampDesc(Wristband wristband, Pageable pageable);
+    Page<WristbandLocation> findByWristbandInOrderByTimeStampDesc(List<Wristband> wristbandList, Pageable pageable);
     List<WristbandLocation> findByIdIn(List<Long> idList);
     @Query(value = "SELECT " +
             "new com.thomasdedinsky.fydp.fydpweb.models.DetailedIntermediate(MAX(w.id), w.wristband) " +
@@ -25,4 +26,5 @@ public interface WristbandLocationRepository extends JpaRepository<WristbandLoca
     List<DetailedIntermediate> findAllDetailedWristbandsByUserIntermediate(@Param("user") User user);
     WristbandLocation findFirstByWristbandOrderByTimeStampDesc(Wristband wristband);
     long countByWristband(Wristband wristband);
+    long countByWristbandIn(List<Wristband> wristbandList);
 }

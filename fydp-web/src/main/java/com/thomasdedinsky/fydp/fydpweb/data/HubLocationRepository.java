@@ -13,6 +13,7 @@ import java.util.List;
 
 public interface HubLocationRepository extends JpaRepository<HubLocation, Long> {
     Page<HubLocation> findByHubOrderByTimeStampDesc(Hub hub, Pageable pageable);
+    Page<HubLocation> findByHubInOrderByTimeStampDesc(List<Hub> hubList, Pageable pageable);
     List<HubLocation> findByIdIn(List<Long> idList);
     HubLocation findFirstByHubOrderByTimeStampDesc(Hub hub);
     @Query(value = "SELECT " +
@@ -20,4 +21,5 @@ public interface HubLocationRepository extends JpaRepository<HubLocation, Long> 
             "FROM HubLocation h GROUP BY h.hub")
     List<DetailedIntermediate> findAllDetailedHubsIntermediate();
     long countByHub(Hub hub);
+    long countByHubIn(List<Hub> hubList);
 }
