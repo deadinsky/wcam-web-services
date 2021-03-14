@@ -1,5 +1,6 @@
 package com.thomasdedinsky.fydp.fydpweb.models;
 
+import com.thomasdedinsky.fydp.fydpweb.auth.User;
 import org.springframework.context.ApplicationEvent;
 
 import javax.persistence.*;
@@ -106,5 +107,13 @@ public class Alert {
 
     public void setTimeStamp(Timestamp timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getAlertString() {
+        User user = wristband.getUser();
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        String fullName = lastName.isEmpty() ? firstName : firstName + " " + lastName;
+        return "Alert " + message + " from Wristband " + wristband.getNickname() + " from User " + fullName + ".";
     }
 }

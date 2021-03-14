@@ -3,16 +3,19 @@ package com.thomasdedinsky.fydp.fydpweb;
 import com.thomasdedinsky.fydp.fydpweb.auth.User;
 import com.thomasdedinsky.fydp.fydpweb.models.Alert;
 import com.thomasdedinsky.fydp.fydpweb.models.Phone;
+import com.thomasdedinsky.fydp.fydpweb.models.Wristband;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Utilities {
-    public static List<String> activeSevereAlertsText = new ArrayList<>();
+    public static Map<String, Integer> activeSevereAlerts = new HashMap<>();
     public static boolean existsActiveSevereAlert = false;
     public static String alertText = "";
     public static List<String> phoneNumbers = new ArrayList<>();
@@ -105,15 +108,27 @@ public class Utilities {
         model.addAttribute("alertText", alertText);
     }
 
+    public static void refreshAlertText() {
+        String newAlertText = "";
+        for (Map.Entry<String, Integer> entry : activeSevereAlerts.entrySet()) {
+            newAlertText += entry.getKey() + (entry.getValue() > 1 ? " x" + entry.getValue() : "") + " | ";
+        }
+        alertText = newAlertText.substring(0, newAlertText.length() - 3);
+        existsActiveSevereAlert = !newAlertText.isEmpty();
+    }
+
     public static void initializeAlerts(List<Alert> alerts) {
-        activeSevereAlertsText = new ArrayList<>();
         for (Alert a : alerts) {
             if (a.isActive() && a.isSevere()) {
-                activeSevereAlertsText.add(a.getMessage());
+                String alertString = a.getAlertString();
+                if (!activeSevereAlerts.containsKey(alertString)) {
+                    activeSevereAlerts.put(alertString, 1);
+                } else {
+                    activeSevereAlerts.put(alertString, activeSevereAlerts.get(alertString) + 1);
+                }
             }
         }
-        alertText = String.join(" | ", activeSevereAlertsText);
-        existsActiveSevereAlert = activeSevereAlertsText.size() > 0;
+        refreshAlertText();
     }
 
     public static void initializePhones(List<Phone> phones) {
@@ -134,23 +149,40 @@ public class Utilities {
     }
 
     public static void sendAlertMessages(Alert alert) {
+        String alertString = alert.getAlertString();
         for (String number : phoneNumbers) {
-            Message.creator(new PhoneNumber(number), fromNumber, alert.getMessage()).create();
+            Message.creator(new PhoneNumber(number), fromNumber, alertString).create();
         }
     }
 
     public static boolean refreshAlert(Alert alert) {
-        if (!alert.isSevere() || (alert.isActive() == activeSevereAlertsText.contains(alert.getId()))) {
+        if (!alert.isSevere()) {
             return false;
         }
-        if (alert.isActive()) {
-            activeSevereAlertsText.add(alert.getMessage());
-            sendAlertMessages(alert);
-        } else {
-            activeSevereAlertsText.remove(alert.getMessage());
+        String alertString = alert.getAlertString();
+        boolean doesAlertExist = activeSevereAlerts.containsKey(alertString);
+        if (!doesAlertExist && !alert.isActive()) {
+            return false;
         }
-        alertText = String.join(" | ", activeSevereAlertsText);
-        existsActiveSevereAlert = activeSevereAlertsText.size() > 0;
+        if (!doesAlertExist) {
+            activeSevereAlerts.put(alertString, 1);
+            sendAlertMessages(alert);
+            refreshAlertText();
+            return true;
+        }
+        Integer alertCount = activeSevereAlerts.get(alertString);
+        if (alert.isActive()) {
+            activeSevereAlerts.put(alertString, alertCount + 1);
+            refreshAlertText();
+            return true;
+        }
+        if (alertCount == 1) {
+            activeSevereAlerts.remove(alertString);
+            refreshAlertText();
+            return true;
+        }
+        activeSevereAlerts.put(alertString, alertCount - 1);
+        refreshAlertText();
         return true;
     }
 }
