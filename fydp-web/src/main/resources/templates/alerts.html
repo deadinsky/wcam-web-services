@@ -19,7 +19,7 @@
             <th scope="col">Is Active?</th>
             <th scope="col">Contact Status</th>
             <th scope="col">Timestamp</th>
-            <th scope="col">Remove?</th>
+            <th scope="col">Resolve?</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +35,7 @@
             <td th:text="${alert.contactStatus}">contactStatus</td>
             <td th:text="${alert.timeStamp}">timeStamp</td>
             <td>
-                <a th:href="@{/alerts/resolve/{id}(id=${alert.id})}">remove</a>
+                <a th:href="@{/alerts/resolve/{id}(id=${alert.id})}">resolve</a>
             </td>
         </tr>
     </tbody>

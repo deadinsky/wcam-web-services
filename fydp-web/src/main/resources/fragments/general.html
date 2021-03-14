@@ -59,7 +59,9 @@
     </div>
 </nav>
 <div th:fragment="alert" th:if="${existsActiveSevereAlert}">
-    <div class="alert alert-danger" role="alert" th:text="${alertText}">alertText</div>
+    <a th:href="@{/alerts}">
+        <div class="alert alert-danger" role="alert" th:text="${alertText}">alertText</div>
+    </a>
 </div>
 <div th:fragment="footer">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
