@@ -42,10 +42,10 @@ button a:hover {
      }
 }
 @media(max-width: 991px) {
-     .navbar {
+     .alert, .navbar {
          font-size: 3.5rem;
      }
-     .alert, .navbar-brand, .navbar-toggler {
+     .navbar-brand, .navbar-toggler {
          font-size: 4rem;
      }
 }
