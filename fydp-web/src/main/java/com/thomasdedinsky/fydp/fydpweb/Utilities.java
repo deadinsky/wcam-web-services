@@ -113,8 +113,13 @@ public class Utilities {
         for (Map.Entry<String, Integer> entry : activeSevereAlerts.entrySet()) {
             newAlertText += entry.getKey() + (entry.getValue() > 1 ? " x" + entry.getValue() : "") + " | ";
         }
-        alertText = newAlertText.substring(0, newAlertText.length() - 3);
-        existsActiveSevereAlert = !newAlertText.isEmpty();
+        if (newAlertText.isEmpty()) {
+            alertText = "";
+            existsActiveSevereAlert = false;
+        } else {
+            alertText = newAlertText.substring(0, newAlertText.length() - 3);
+            existsActiveSevereAlert = true;
+        }
     }
 
     public static void initializeAlerts(List<Alert> alerts) {

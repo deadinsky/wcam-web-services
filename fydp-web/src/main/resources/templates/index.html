@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>WCAM Home</title>
-    <link th:replace="../fragments/general.html :: bootstrap"/>
-    <link th:replace="../fragments/general.html :: stylesheet"/>
-</head>
+<head th:replace="../fragments/general.html :: head('WCAM Home')">
 <body>
 <nav th:replace="../fragments/general.html :: navbar"></nav>
 <p>Welcome to the web interface for the Wearable Cardiovascular Abnormality Monitor.</p>
